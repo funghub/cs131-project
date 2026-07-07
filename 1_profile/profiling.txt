@@ -1,0 +1,12 @@
+Characterize your dataset without loading it into memory.
+
+du -h / wc -l — how big, how many rows
+head / tail, cut -d',' -f, column -t — peek at the schema
+sort | uniq -c | sort -nr — top categories, cardinality
+awk — a quick numeric aggregate (sum / average of a column)
+grep -c — filtering counts
+Put time in front of every command so you can measure the computational cost.
+Deliverable:
+
+Profiling results on your final poster (Section title should be "Profiling")
+A list of exact commands you ran in GitHub ~/cs131/project/1_profile/profiling.txt.

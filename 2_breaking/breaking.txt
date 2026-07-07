@@ -1,0 +1,9 @@
+Make the comparison explicit and reproducible:
+
+Try to open the raw file (or one year of it) in Excel → document the failure (row cap, or it simply won't open). Screenshot it. Store it under ~/cs131/project/2_breaking/.
+Try pandas.read_csv() on the full file → document the out-of-memory error or the wall-clock time. Screenshot the memory blowup. Store it under ~/cs131/project/2_breaking/.
+Run the same aggregation two ways: (a) command line and (b) PySpark on the whole thing.
+Deliverable:
+
+Breaking results on your final poster (Section title should be "Breaking")
+Experimentation details should be recorded in ~/cs131/project/2_breaking/breaking.txt along with screenshots under ~/cs131/project/2_breaking/.

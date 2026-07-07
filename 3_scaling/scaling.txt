@@ -1,0 +1,8 @@
+Keep the raw data in a GCS bucket and read it directly via gs://… — do not copy multi-GB files into your home dir.
+Real data-engineering work: define a schema, transform, groupBy / window functions, joins, caching, optionally Spark SQL.
+Scaling experiment: run the same Spark job on 1 worker, then 2, then 4 and record the runtime each time.
+Delete your cluster (gcloud dataproc clusters delete …) when you're done for the day. Ephemeral clusters / gcloud dataproc jobs submit pyspark are cheaper than long-running ones.
+Deliverable:
+
+Scaling results on your final poster (Section title should be "Scaling")
+Experimentation details should be recorded in ~/cs131/project/3_scaling/scaling.txt along with other pyspark code and results under ~/cs131/project/3_scaling/.

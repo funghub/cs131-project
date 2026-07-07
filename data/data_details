@@ -1,0 +1,59 @@
+# UK Biobank Per-Phenotype File Columns
+
+| # | Column Name | Definition | Example |
+|---|-------------|------------|---------|
+| 1 | chr | Chromosome of the variant | 1 |
+| 2 | pos | Position of the variant (GRCh37 coordinates) | 11063 |
+| 3 | ref | Reference allele on the forward strand | T |
+| 4 | alt | Alternate allele (effect allele used for GWAS) | G |
+| 5 | af_meta_hq | Alt allele frequency, meta-analyzed across QC-passing populations | 2.844e-04 |
+| 6 | beta_meta_hq | Effect size of alt allele, meta-analyzed across QC-passing populations | -6.263e-02 |
+| 7 | se_meta_hq | Standard error of beta_meta_hq | 8.135e-02 |
+| 8 | neglog10_pval_meta_hq | -log10 p-value for beta_meta_hq significance | 3.552e-01 |
+| 9 | neglog10_pval_heterogeneity_hq | -log10 p-value from heterogeneity test (QC-pass meta-analysis) | 6.233e-01 |
+| 10 | af_meta | Alt allele frequency, meta-analyzed across all populations GWASed | 2.844e-04 |
+| 11 | beta_meta | Effect size of alt allele, meta-analyzed across all populations GWASed | -6.263e-02 |
+| 12 | se_meta | Standard error of beta_meta | 8.135e-02 |
+| 13 | neglog10_pval_meta | -log10 p-value for beta_meta significance | 3.552e-01 |
+| 14 | neglog10_pval_heterogeneity | -log10 p-value from heterogeneity test (full meta-analysis) | 6.233e-01 |
+| 15 | af_AFR | Alt allele frequency in African ancestry samples | 1.542e-02 |
+| 16 | af_AMR | Alt allele frequency in Admixed American ancestry samples | NA |
+| 17 | af_CSA | Alt allele frequency in Central/South Asian ancestry samples | NA |
+| 18 | af_EAS | Alt allele frequency in East Asian ancestry samples | NA |
+| 19 | af_EUR | Alt allele frequency in European ancestry samples | 4.709e-05 |
+| 20 | af_MID | Alt allele frequency in Middle Eastern ancestry samples | NA |
+| 21 | beta_AFR | Effect size in AFR samples | -5.204e-02 |
+| 22 | beta_AMR | Effect size in AMR samples | NA |
+| 23 | beta_CSA | Effect size in CSA samples | NA |
+| 24 | beta_EAS | Effect size in EAS samples | NA |
+| 25 | beta_EUR | Effect size in EUR samples | -9.329e-01 |
+| 26 | beta_MID | Effect size in MID samples | NA |
+| 27 | se_AFR | Standard error of beta_AFR | 8.184e-02 |
+| 28 | se_AMR | Standard error of beta_AMR | NA |
+| 29 | se_CSA | Standard error of beta_CSA | NA |
+| 30 | se_EAS | Standard error of beta_EAS | NA |
+| 31 | se_EUR | Standard error of beta_EUR | 7.421e-01 |
+| 32 | se_MID | Standard error of beta_MID | NA |
+| 33 | neglog10_pval_AFR | -log10 p-value for beta_AFR significance | 2.800e-01 |
+| 34 | neglog10_pval_AMR | -log10 p-value for beta_AMR significance | NA |
+| 35 | neglog10_pval_CSA | -log10 p-value for beta_CSA significance | NA |
+| 36 | neglog10_pval_EAS | -log10 p-value for beta_EAS significance | NA |
+| 37 | neglog10_pval_EUR | -log10 p-value for beta_EUR significance | 6.805e-01 |
+| 38 | neglog10_pval_MID | -log10 p-value for beta_MID significance | NA |
+| 39 | low_confidence_AFR | Flag: too few alt-allele carriers in AFR to trust the estimate | false |
+| 40 | low_confidence_AMR | Flag: too few alt-allele carriers in AMR to trust the estimate | NA |
+| 41 | low_confidence_CSA | Flag: too few alt-allele carriers in CSA to trust the estimate | NA |
+| 42 | low_confidence_EAS | Flag: too few alt-allele carriers in EAS to trust the estimate | NA |
+| 43 | low_confidence_EUR | Flag: too few alt-allele carriers in EUR to trust the estimate | false |
+| 44 | low_confidence_MID | Flag: too few alt-allele carriers in MID to trust the estimate | NA |
+
+## Population Codes
+
+- **EUR** = European ancestry
+- **CSA** = Central/South Asian ancestry
+- **AFR** = African ancestry
+- **EAS** = East Asian ancestry
+- **MID** = Middle Eastern ancestry
+- **AMR** = Admixed American ancestry
+
+**Source:** https://pan.ukbb.broadinstitute.org/docs/per-phenotype-files/index.html#per-phenotype-files

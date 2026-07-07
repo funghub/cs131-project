@@ -1,0 +1,5 @@
+A genuine data-science question with findings, visualizations, and a writeup. The question is the "so what" that justifies all the engineering.
+
+Deliverable:
+
+Final poster draft (PDF) that includes motivating narrative, final analysis results, and the three sections from Phases 1 - 3. Also, include a link to your GitHub Repo on your poster.
