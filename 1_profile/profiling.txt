@@ -6,7 +6,33 @@ sort | uniq -c | sort -nr — top categories, cardinality
 awk — a quick numeric aggregate (sum / average of a column)
 grep -c — filtering counts
 Put time in front of every command so you can measure the computational cost.
-Deliverable:
 
-Profiling results on your final poster (Section title should be "Profiling")
-A list of exact commands you ran in GitHub ~/cs131/project/1_profile/profiling.txt.
+
+
+Deliverable:
+time du -h biomarkers-30870-both_sexes-irnt.tsv icd10-E11-both_sexes.tsv 
+time wc -l biomarkers-30870-both_sexes-irnt.tsv icd10-E11-both_sexes.tsv 
+
+time head -10 biomarkers-30870-both_sexes-irnt.tsv | cut -f1,3,7 | column -t -s $'\t'
+time head -10 biomarkers-30870-both_sexes-irnt.tsv | cut -f1,3,7 -d$'\t'
+time head -10 icd10-E11-both_sexes.tsv | cut -f1,3,7 | column -t -s $'\t'
+
+
+[sort | uniq -c | sort -nr — top categories, cardinality]
+
+[awk — a quick numeric aggregate (sum / average of a column)]
+
+
+time for col in 23 25 29 31;                                                   
+do
+  echo “Column $col:”
+  cut -f$col -d$'\t' biomarkers-30870-both_sexes-irnt.tsv | grep -c ‘^NA$’
+  echo
+done
+
+time for col in 28 30 33 35;                                                   
+do
+  echo “Column $col:”
+  cut -f$col -d$'\t' icd10-E11-both_sexes.tsv | grep -c ‘^NA$’
+  echo
+done
