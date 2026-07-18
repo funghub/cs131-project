@@ -7,21 +7,145 @@ awk — a quick numeric aggregate (sum / average of a column)
 grep -c — filtering counts
 Put time in front of every command so you can measure the computational cost.
 
-
-
+=======================================================================================
 Deliverable:
-time du -h biomarkers-30870-both_sexes-irnt.tsv icd10-E11-both_sexes.tsv 
-time wc -l biomarkers-30870-both_sexes-irnt.tsv icd10-E11-both_sexes.tsv 
+=======================================================================================
 
-time head -10 biomarkers-30870-both_sexes-irnt.tsv | cut -f1,3,7 | column -t -s $'\t'
+---------------------------------------------------------------------------------------
+time du -h biomarkers-30870-both_sexes-irnt.tsv icd10-E11-both_sexes.tsv 
+---------------------------------------------------------------------------------------
+8.3G    biomarkers-30870-both_sexes-irnt.tsv
+8.8G    icd10-E11-both_sexes.tsv
+
+real    0m0.003s
+user    0m0.000s
+sys     0m0.002s
+
+---------------------------------------------------------------------------------------
+time wc -l biomarkers-30870-both_sexes-irnt.tsv icd10-E11-both_sexes.tsv 
+---------------------------------------------------------------------------------------
+28987535 biomarkers-30870-both_sexes-irnt.tsv
+28987535 icd10-E11-both_sexes.tsv
+57975070 total
+
+real    3m58.164s
+user    0m0.964s
+sys     0m40.212s
+
+---------------------------------------------------------------------------------------
+time head -5 biomarkers-30870-both_sexes-irnt.tsv | cut -f1,3,7 | column -t -s $'\t'
+---------------------------------------------------------------------------------------
+chr  ref  se_meta_hq
+1    T    7.305e-02
+1    G    8.236e-02
+1    G    4.691e-02
+1    C    1.775e-01
+
+real    0m0.006s
+user    0m0.003s
+sys     0m0.003s
+
+---------------------------------------------------------------------------------------
+time head -5 icd10-E11-both_sexes.tsv | cut -f1,3,7 | column -t -s $'\t'
+---------------------------------------------------------------------------------------
+chr  ref  beta_meta_hq
+1    T    8.950e+00
+1    G    4.669e-01
+1    G    2.992e-01
+1    C    NA
+
+real    0m0.006s
+user    0m0.003s
+sys     0m0.005s
+
+---------------------------------------------------------------------------------------
+different commands for similar formats
+
 time head -10 biomarkers-30870-both_sexes-irnt.tsv | cut -f1,3,7 -d$'\t'
 time head -10 icd10-E11-both_sexes.tsv | cut -f1,3,7 | column -t -s $'\t'
+---------------------------------------------------------------------------------------
 
-
+---------------------------------------------------------------------------------------
 [sort | uniq -c | sort -nr — top categories, cardinality]
+---------------------------------------------------------------------------------------
+time(cut -f3,4 biomarkers-30870-both_sexes-irnt.tsv | tail -n +2 | sort | uniq -c | sort -nr | head -20 )
+shows the most common ref and alt allele combinations
 
+5335300 G       A
+5328827 C       T
+3828786 A       G
+3820824 T       C
+1242164 C       A
+1241652 G       T
+1175797 C       G
+1174075 G       C
+ 989922 T       G
+ 988744 A       C
+ 932237 A       T
+ 931148 T       A
+  81819 AT      A
+  79302 CT      C
+  75504 A       AT
+  71753 CA      C
+  70719 TA      T
+  69195 T       TA
+  63418 C       CA
+  61332 C       CT
+
+real    6m48.271s
+user    0m27.041s
+sys     1m9.582s
+
+time(cut -f3,4 icd10-E11-both_sexes.tsv | tail -n +2 | sort | uniq
+-c | sort -nr | head -20 )
+5335300 G       A
+5328827 C       T
+3828786 A       G
+3820824 T       C
+1242164 C       A
+1241652 G       T
+1175797 C       G
+1174075 G       C
+ 989922 T       G
+ 988744 A       C
+ 932237 A       T
+ 931148 T       A
+  81819 AT      A
+  79302 CT      C
+  75504 A       AT
+  71753 CA      C
+  70719 TA      T
+  69195 T       TA
+  63418 C       CA
+  61332 C       CT
+
+real    7m27.912s
+user    0m27.690s
+sys     1m12.759s
+
+---------------------------------------------------------------------------------------
 [awk — a quick numeric aggregate (sum / average of a column)]
+---------------------------------------------------------------------------------------
+maybe the total allele per ethnicity?
 
+awk -F'\t' 'NR>1 && $15!="NA" {sum+=$15; n++} END {print "AFR average:", sum/n}' biomarkers-30870-both_sexes-irnt.tsv
+
+For all???: 
+awk -F'\t' 'NR>1 {
+  if ($15!="NA") { sumAFR+=$15; nAFR++ }
+  if ($16!="NA") { sumAMR+=$16; nAMR++ }
+  if ($17!="NA") { sumCSA+=$17; nCSA++ }
+  if ($18!="NA") { sumEAS+=$18; nEAS++ }
+  if ($19!="NA") { sumEUR+=$19; nEUR++ }
+  if ($20!="NA") { sumMID+=$20; nMID++ }
+} END {
+  print "AFR avg af:", sumAFR/nAFR, "(n="nAFR")"
+  print "AMR avg af:", sumAMR/nAMR, "(n="nAMR")"
+  print "CSA avg af:", sumCSA/nCSA, "(n="nCSA")"
+  print "EAS avg af:", sumEAS/nEAS, "(n="nEAS")"
+  print "EUR avg af:", sumEUR/nEUR, "(n="nEUR")"
+  print "MID avg af:", sumMID/nMID, "(n="nMID")"
+}'  biomarkers-30870-both_sexes-irnt.tsv
 
 time for col in 23 25 29 31;                                                   
 do
@@ -36,3 +160,7 @@ do
   cut -f$col -d$'\t' icd10-E11-both_sexes.tsv | grep -c ‘^NA$’
   echo
 done
+
+
+
+
