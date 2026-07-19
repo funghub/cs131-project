@@ -69,6 +69,7 @@ time head -10 icd10-E11-both_sexes.tsv | cut -f1,3,7 | column -t -s $'\t'
 [sort | uniq -c | sort -nr — top categories, cardinality]
 ---------------------------------------------------------------------------------------
 time(cut -f3,4 biomarkers-30870-both_sexes-irnt.tsv | tail -n +2 | sort | uniq -c | sort -nr | head -20 )
+
 shows the most common ref and alt allele combinations
 
 5335300 G       A
@@ -126,12 +127,9 @@ sys     1m12.759s
 ---------------------------------------------------------------------------------------
 [awk — a quick numeric aggregate (sum / average of a column)]
 ---------------------------------------------------------------------------------------
-maybe the total allele per ethnicity?
+Calculate the average allele frequency per ancestry for triglyceride biomarker
 
-awk -F'\t' 'NR>1 && $15!="NA" {sum+=$15; n++} END {print "AFR average:", sum/n}' biomarkers-30870-both_sexes-irnt.tsv
-
-For all???: 
-awk -F'\t' 'NR>1 {
+time (awk -F'\t' 'NR>1 {
   if ($15!="NA") { sumAFR+=$15; nAFR++ }
   if ($16!="NA") { sumAMR+=$16; nAMR++ }
   if ($17!="NA") { sumCSA+=$17; nCSA++ }
@@ -145,7 +143,45 @@ awk -F'\t' 'NR>1 {
   print "EAS avg af:", sumEAS/nEAS, "(n="nEAS")"
   print "EUR avg af:", sumEUR/nEUR, "(n="nEUR")"
   print "MID avg af:", sumMID/nMID, "(n="nMID")"
-}'  biomarkers-30870-both_sexes-irnt.tsv
+}' biomarkers-30870-both_sexes-irnt.tsv)
+AFR avg af: 0.145318 (n=21964214)
+AMR avg af: 0.240157 (n=11623103)
+CSA avg af: 0.174774 (n=15963164)
+EAS avg af: 0.269806 (n=10234397)
+EUR avg af: 0.116634 (n=23861718)
+MID avg af: 0.203203 (n=13974529)
+
+real    8m1.867s
+user    1m34.330s
+sys     1m16.670s
+
+time (awk -F'\t' 'NR>1 {
+  if ($17!="NA") { sumAFR+=$17; nAFR++ }
+  if ($18!="NA") { sumCSA+=$18; nCSA++ }
+  if ($19!="NA") { sumEAS+=$19; nEAS++ }
+  if ($20!="NA") { sumEUR+=$20; nEUR++ }
+  if ($21!="NA") { sumMID+=$21; nMID++ }
+} END {
+  print "AFR avg af (cases):", sumAFR/nAFR, "(n="nAFR")"
+  print "CSA avg af (cases):", sumCSA/nCSA, "(n="nCSA")"
+  print "EAS avg af (cases):", sumEAS/nEAS, "(n="nEAS")"
+  print "EUR avg af (cases):", sumEUR/nEUR, "(n="nEUR")"
+  print "MID avg af (cases):", sumMID/nMID, "(n="nMID")"
+}' icd10-E11-both_sexes.tsv)
+AFR avg af (cases): 0.14529 (n=21964524)
+CSA avg af (cases): 0.174757 (n=15968823)
+EAS avg af (cases): 0.269963 (n=10236978)
+EUR avg af (cases): 0.116642 (n=23861814)
+MID avg af (cases): 0.203791 (n=13974582)
+
+real    7m45.649s
+user    1m27.087s
+sys     1m21.146s
+
+---------------------------------------------------------------------------------------
+grep -c — filtering counts
+---------------------------------------------------------------------------------------
+Count how many NA for effect size for diff populations beta_CSA    beta_EUR    se_CSA    se_EUR
 
 time for col in 23 25 29 31;                                                   
 do
@@ -161,6 +197,25 @@ do
   echo
 done
 
+For Triglyceride DS:
+Check beta_CSA = 13,024,370
+Check beta_EUR = 5,125,816
+Check se_CSA = 13,024,370
+Check se_EUR = 5,125,816
+
+For Diabetes DS:
+Check beta_CSA = 13,018,711
+Check beta_EUR = 5,125,720
+Check se_CSA = 13,018,711
+Check se_EUR = 5,125,720
+
+real    2m26.893s
+user    2m5.326s
+sys    0m30.073s
+
+real    2m30.410s
+user    2m7.234s
+sys    0m31.735s
 
 
 
