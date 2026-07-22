@@ -1,5 +1,5 @@
 # With Excel:
-
+uploading the .tsv file into Excel was unsuccessful. Program became unresponsive and then gave a dataset is too large error.
 
 # With Pandas:
 $ python3 pandas_dataset.py
