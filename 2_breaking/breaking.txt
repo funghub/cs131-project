@@ -1,22 +1,103 @@
-Make the comparison explicit and reproducible:
-
-Try to open the raw file (or one year of it) in Excel → document the failure (row cap, or it simply won't open). Screenshot it. Store it under ~/cs131/project/2_breaking/.
-Try pandas.read_csv() on the full file → document the out-of-memory error or the wall-clock time. Screenshot the memory blowup. Store it under ~/cs131/project/2_breaking/.
-Run the same aggregation two ways: (a) command line and (b) PySpark on the whole thing.
-Deliverable:
-
-Breaking results on your final poster (Section title should be "Breaking")
-Experimentation details should be recorded in ~/cs131/project/2_breaking/breaking.txt along with screenshots under ~/cs131/project/2_breaking/.
+# With Excel:
 
 
-With Excel:
-
-
-With Pandas:
+# With Pandas:
 $ python3 pandas_dataset.py
 Killed                     python3 pandas_dataset.py
 [363166.811230] Out of memory: Killed process 114700 (python3) total-vm:9461504kB, anon-rss:5036636kB, file-rss:1656kB, shmem-rss:8kB, UID:1000 pgtables:11936kB oom_score_adj:200
 
 
-Aggregations Two Ways:
+# Aggregations Two Ways counting NA in beta_CSA, beta_EUR, se_CSA, se_EUR:
+## Command Line Aggregation
+```
+time for col in 23 25 29 31;                                                   
+do
+  echo “Column $col:”
+  cut -f$col -d$'\t' biomarkers-30870-both_sexes-irnt.tsv | grep -c ‘^NA$’
+  echo
+done
+```
+```
+sh scripts/count_NA_triglyceride.sh > scripts/results/count_NA_triglyceride.txt &
+```
+### Results:
+Check beta_CSA = 13,024,370
+Check beta_EUR = 5,125,816
+Check se_CSA = 13,024,370
+Check se_EUR = 5,125,816
 
+real    2m26.893s
+user    2m5.326s
+sys    0m30.073s
+
+## PySpark Aggregation
+File pyspark_dataset.py:
+```
+from pyspark.sql import SparkSession
+import sys
+
+# Create a SparkSession
+spark = SparkSession.builder.appName("SparkTriglcerideDataset").getOrCreate()
+
+# arguments passed in from the command line
+input_path  = sys.argv[1]
+
+# Read data from TSV.gz file
+df = (spark.read
+      .format("csv")
+      .option("compression","gzip")
+      .option("sep", "\t")
+      .option("inferSchema", "true") # Infer schema (data types)
+      .option("header", "true") # special row to put header to tell what data
+      .csv(input_path))
+
+# Check if columns look right
+# print("\nCheck columns structure:")
+# df.printSchema()
+
+# Show first 5 rows
+# print("\nCheck column names:")
+# df.show(5)
+
+# Select the Columns we want to look
+df_selected =  df.select('beta_CSA','beta_EUR','se_CSA','se_EUR')
+
+# Display 1st 5 lines
+#print("\nCheck first 5 rows:")
+#df_selected.show(5)
+
+NAbeta_CSA = df_selected.where(df_selected.beta_CSA=="NA").count()
+NAbeta_EUR = df_selected.where(df_selected.beta_EUR=="NA").count()
+NAse_CSA = df_selected.where(df_selected.se_CSA=="NA").count()
+NAse_EUR = df_selected.where(df_selected.se_EUR=="NA").count()
+
+print(f'''
+      beta_CSA = {NAbeta_CSA}
+      beta_EUR = {NAbeta_EUR}
+      se_CSA = {NAse_CSA}
+      se_EUR = {NAse_EUR}
+      ''')
+```
+
+$ BUCKET=cs131_proj
+$ REGION=us-central1
+
+$ time gcloud dataproc batches submit pyspark pyspark_dataset.py \
+  --region=$REGION \
+  --deps-bucket=$BUCKET \
+  -- gs://cs131_proj/biomarkers-30870-both_sexes-irnt.tsv.gz \
+  2>&1 | tee results.txt
+
+### Results:
+beta_CSA = 13,024,370
+beta_EUR = 5,125,816
+se_CSA = 13,024,370
+se_EUR = 5,125,816
+
+real	14m7.147s
+user	0m2.050s
+sys	0m0.147s
+
+
+## Conclusion For Aggregation Methods:
+Command line on local utilized significantly sorter time than PySpark for the same task of counting "NA" in the four columns of beta_CSA, beta_EUR, se_CSA, and se_EUR.
