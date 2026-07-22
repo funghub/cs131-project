@@ -7,3 +7,16 @@ Deliverable:
 
 Breaking results on your final poster (Section title should be "Breaking")
 Experimentation details should be recorded in ~/cs131/project/2_breaking/breaking.txt along with screenshots under ~/cs131/project/2_breaking/.
+
+
+With Excel:
+
+
+With Pandas:
+$ python3 pandas_dataset.py
+Killed                     python3 pandas_dataset.py
+[363166.811230] Out of memory: Killed process 114700 (python3) total-vm:9461504kB, anon-rss:5036636kB, file-rss:1656kB, shmem-rss:8kB, UID:1000 pgtables:11936kB oom_score_adj:200
+
+
+Aggregations Two Ways:
+
