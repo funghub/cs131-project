@@ -100,4 +100,4 @@ sys	0m0.147s
 
 
 ## Conclusion For Aggregation Methods:
-Command line on local utilized significantly sorter time than PySpark for the same task of counting "NA" in the four columns of beta_CSA, beta_EUR, se_CSA, and se_EUR.
+Command line on local utilized significantly shorter time than PySpark for the same task of counting "NA" in the four columns of beta_CSA, beta_EUR, se_CSA, and se_EUR.
