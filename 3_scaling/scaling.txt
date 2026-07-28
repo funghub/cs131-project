@@ -6,3 +6,9 @@ Deliverable:
 
 Scaling results on your final poster (Section title should be "Scaling")
 Experimentation details should be recorded in ~/cs131/project/3_scaling/scaling.txt along with other pyspark code and results under ~/cs131/project/3_scaling/.
+=== Submitting batch with 2 executor(s) ===
+exec2: 516s
+=== Waiting 360s for machines to release ===
+Cancelled because 2 executors took over 30 mins, added .cache() in 2 places
+=== Submitting batch with 2 executor(s) ===
+
