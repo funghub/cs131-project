@@ -1,0 +1,384 @@
+=== Submitting batch with 2 executor(s) ===
+Batch [d4e1dd62356b4c6d8d8d550831d0d2a5] submitted.
+WARNING: No runtime version specified. Using the default runtime version. It is recommended to select a specific major.minor runtime version in production, as the default runtime version may change at any time.
+Using the default container image
+Waiting for container log creation
+PYSPARK_PYTHON=/opt/dataproc/conda/bin/python
+Generating /home/spark/.pip/pip.conf
+Configuring index-url as 'https://us-python.pkg.dev/artifact-registry-python-cache/virtual-python/simple/'
+JAVA_HOME=/usr/lib/jvm/temurin-17-jdk-amd64
+SPARK_EXTRA_CLASSPATH=
+:: loading settings :: file = /etc/spark/conf/ivysettings.xml
+26/07/31 08:03:19 WARN MetricsConfig: Cannot locate configuration: tried hadoop-metrics2-google-hadoop-file-system.properties,hadoop-metrics2.properties
+26/07/31 08:03:19 INFO MetricsSystemImpl: Scheduled Metric snapshot period at 10 second(s).
+26/07/31 08:03:19 INFO MetricsSystemImpl: google-hadoop-file-system metrics system started
+root
+ |-- chr: string (nullable = true)
+ |-- pos: integer (nullable = true)
+ |-- ref: string (nullable = true)
+ |-- alt: string (nullable = true)
+ |-- af_meta_hq: double (nullable = true)
+ |-- beta_meta_hq: double (nullable = true)
+ |-- se_meta_hq: double (nullable = true)
+ |-- neglog10_pval_meta_hq: double (nullable = true)
+ |-- neglog10_pval_heterogeneity_hq: double (nullable = true)
+ |-- af_meta: double (nullable = true)
+ |-- beta_meta: double (nullable = true)
+ |-- se_meta: double (nullable = true)
+ |-- neglog10_pval_meta: double (nullable = true)
+ |-- neglog10_pval_heterogeneity: double (nullable = true)
+ |-- af_AFR: double (nullable = true)
+ |-- af_AMR: double (nullable = true)
+ |-- af_CSA: double (nullable = true)
+ |-- af_EAS: double (nullable = true)
+ |-- af_EUR: double (nullable = true)
+ |-- af_MID: double (nullable = true)
+ |-- beta_AFR: double (nullable = true)
+ |-- beta_AMR: double (nullable = true)
+ |-- beta_CSA: double (nullable = true)
+ |-- beta_EAS: double (nullable = true)
+ |-- beta_EUR: double (nullable = true)
+ |-- beta_MID: double (nullable = true)
+ |-- se_AFR: double (nullable = true)
+ |-- se_AMR: double (nullable = true)
+ |-- se_CSA: double (nullable = true)
+ |-- se_EAS: double (nullable = true)
+ |-- se_EUR: double (nullable = true)
+ |-- se_MID: double (nullable = true)
+ |-- neglog10_pval_AFR: double (nullable = true)
+ |-- neglog10_pval_AMR: double (nullable = true)
+ |-- neglog10_pval_CSA: double (nullable = true)
+ |-- neglog10_pval_EAS: double (nullable = true)
+ |-- neglog10_pval_EUR: double (nullable = true)
+ |-- neglog10_pval_MID: double (nullable = true)
+ |-- low_confidence_AFR: string (nullable = true)
+ |-- low_confidence_AMR: string (nullable = true)
+ |-- low_confidence_CSA: string (nullable = true)
+ |-- low_confidence_EAS: string (nullable = true)
+ |-- low_confidence_EUR: string (nullable = true)
+ |-- low_confidence_MID: string (nullable = true)
+
+26/07/31 08:03:26 WARN SparkStringUtils: Truncated the string representation of a plan since it was too large. This behavior can be adjusted by setting 'spark.sql.debug.maxToStringFields'.
+Significant triglyceride variants: 79265
+Joined row count: 79173
+
+Check first 5 rows of z-scores:
++---------------+------------------+--------------------+
+|     variant_id|    z_triglyceride|          z_diabetes|
++---------------+------------------+--------------------+
+|1:10797428:G:GC|0.5724893679662423| -0.3717065799727368|
+| 1:10799577:T:C|0.7395075562231058|-0.33688034796783095|
+| 1:23755513:T:C|-2.078358776769511| 0.16943548569657813|
+| 1:23755716:T:C| -2.07623930014625|  0.1719054054564959|
+| 1:23756155:T:C|-2.075815404821598| 0.17526711116320068|
++---------------+------------------+--------------------+
+only showing top 5 rows
+
+
+Check chromosome-level aggregation:
++---+-----------------------+-------------------+------------------------+------------------------+------------+
+|chr|mean_abs_z_triglyceride|mean_abs_z_diabetes|mean_tg_heterogeneity_hq|mean_db_heterogeneity_hq|num_variants|
++---+-----------------------+-------------------+------------------------+------------------------+------------+
+|  7|     0.9061346601945971| 1.0304948860209675|      0.9910163100654938|      0.5992456381937261|        2901|
+| 18|     1.2318537521963957| 1.2679479916560255|       0.522050378666667|      0.8531723136000007|         375|
+|  9|     0.8443049498764507| 0.6923914092389081|      0.8375006080402004|     0.38583245648241205|         995|
+| 15|     1.0363646646891331| 0.8291511359583331|       1.230541058235293|     0.43164585716577597|        1870|
+| 13|     0.9777863148447864| 0.8052986774534516|      0.6118128736616699|      0.4277231498929335|         467|
+| 14|      1.572648954304633| 0.8224822594513391|       0.954286416666667|     0.41710342592592586|         108|
+|  3|     0.8537677769214549|  0.782261334245784|      0.4460328000411534|     0.40844517271604935|        2430|
+| 22|     0.8126020679430771| 0.7324751006621577|     0.42972097011278215|     0.39829244454887275|        1064|
+| 16|     0.9782408998167724|  0.721744572921553|      0.5556470047789718|     0.37960534928315404|        1674|
+| 17|     0.8238951644310665| 0.7340528106875505|      0.6040715736842098|     0.39332429232781974|        2660|
+|  6|     1.4002083973669421|  0.956876315692632|      0.9109498441541036|       0.552454731189758|       19441|
+|  X|     1.1277967741854722|  1.016788937522198|      0.5423349801302307|      0.6076160416744202|        4300|
+|  1|     0.9181733976137313| 0.9554374610049805|      0.5993807914902813|      0.5529007779999975|        4630|
+| 20|     0.9160965938947665| 1.0822549936270678|      0.4217360750323421|       0.647041736610608|        1546|
+| 21|     0.8779016842219439| 1.4638689988881493|     0.40320070175438594|      0.8714777777777782|         171|
+| 11|       1.17273884831277| 0.7454286008591067|      1.7215345398730753|      0.4053005240834091|        5515|
+|  8|     1.0782116744356456| 0.8003836885009848|       1.012665829595743|     0.44015906687517425|       10711|
+|  5|     1.0647210704094079| 0.6980738793561287|      0.8291566903999988|     0.35150070606315814|        2375|
+| 19|     1.0933318938925085| 0.7765319589670476|      0.9332086791196759|      0.4251426370680252|        2749|
+| 10|     0.8170534477943148| 0.8413687339762407|      0.5106134880212289|      0.4534927888741471|        2638|
+|  4|     1.0174095268796879| 0.8043776915104021|      0.6838013520114953|      0.4336475873850576|        3480|
+| 12|     0.9798700628984942| 0.8555602290347156|      0.6605347432170554|      0.4714567770348834|        2064|
+|  2|     0.9886500576314767| 0.9796408086034287|      0.9307865552006395|      0.5734215298882005|        5009|
++---+-----------------------+-------------------+------------------------+------------------------+------------+
+
+26/07/31 08:26:59 INFO PathOutputCommitterFactory: No output committer factory defined, defaulting to FileOutputCommitterFactory
+26/07/31 08:27:05 INFO PathOutputCommitterFactory: No output committer factory defined, defaulting to FileOutputCommitterFactory
+Batch [d4e1dd62356b4c6d8d8d550831d0d2a5] finished.
+metadata:
+  '@type': type.googleapis.com/google.cloud.dataproc.v1.BatchOperationMetadata
+  batch: projects/lithe-bonito-499516-f9/locations/us-east1/batches/d4e1dd62356b4c6d8d8d550831d0d2a5
+  batchUuid: fa01437c-8a96-46f1-b52e-47907d976b9e
+  createTime: '2026-07-31T08:01:52.414640Z'
+  description: Batch
+  labels:
+    goog-dataproc-batch-id: d4e1dd62356b4c6d8d8d550831d0d2a5
+    goog-dataproc-batch-uuid: fa01437c-8a96-46f1-b52e-47907d976b9e
+    goog-dataproc-drz-resource-uuid: batch-fa01437c-8a96-46f1-b52e-47907d976b9e
+    goog-dataproc-location: us-east1
+  operationType: BATCH
+  warnings:
+  - No runtime version specified. Using the default runtime version. It is recommended
+    to select a specific major.minor runtime version in production, as the default
+    runtime version may change at any time.
+name: projects/lithe-bonito-499516-f9/regions/us-east1/operations/395d2a52-ad89-3597-ab58-fd5ed8b52034
+exec2: 1530s
+=== Waiting 120s for machines to release ===
+=== Submitting batch with 3 executor(s) ===
+Batch [f57db9563a26447393a0d0eda265bf0e] submitted.
+WARNING: No runtime version specified. Using the default runtime version. It is recommended to select a specific major.minor runtime version in production, as the default runtime version may change at any time.
+Using the default container image
+Waiting for container log creation
+PYSPARK_PYTHON=/opt/dataproc/conda/bin/python
+Generating /home/spark/.pip/pip.conf
+Configuring index-url as 'https://us-python.pkg.dev/artifact-registry-python-cache/virtual-python/simple/'
+JAVA_HOME=/usr/lib/jvm/temurin-17-jdk-amd64
+SPARK_EXTRA_CLASSPATH=
+:: loading settings :: file = /etc/spark/conf/ivysettings.xml
+26/07/31 08:30:37 WARN MetricsConfig: Cannot locate configuration: tried hadoop-metrics2-google-hadoop-file-system.properties,hadoop-metrics2.properties
+26/07/31 08:30:37 INFO MetricsSystemImpl: Scheduled Metric snapshot period at 10 second(s).
+26/07/31 08:30:37 INFO MetricsSystemImpl: google-hadoop-file-system metrics system started
+root
+ |-- chr: string (nullable = true)
+ |-- pos: integer (nullable = true)
+ |-- ref: string (nullable = true)
+ |-- alt: string (nullable = true)
+ |-- af_meta_hq: double (nullable = true)
+ |-- beta_meta_hq: double (nullable = true)
+ |-- se_meta_hq: double (nullable = true)
+ |-- neglog10_pval_meta_hq: double (nullable = true)
+ |-- neglog10_pval_heterogeneity_hq: double (nullable = true)
+ |-- af_meta: double (nullable = true)
+ |-- beta_meta: double (nullable = true)
+ |-- se_meta: double (nullable = true)
+ |-- neglog10_pval_meta: double (nullable = true)
+ |-- neglog10_pval_heterogeneity: double (nullable = true)
+ |-- af_AFR: double (nullable = true)
+ |-- af_AMR: double (nullable = true)
+ |-- af_CSA: double (nullable = true)
+ |-- af_EAS: double (nullable = true)
+ |-- af_EUR: double (nullable = true)
+ |-- af_MID: double (nullable = true)
+ |-- beta_AFR: double (nullable = true)
+ |-- beta_AMR: double (nullable = true)
+ |-- beta_CSA: double (nullable = true)
+ |-- beta_EAS: double (nullable = true)
+ |-- beta_EUR: double (nullable = true)
+ |-- beta_MID: double (nullable = true)
+ |-- se_AFR: double (nullable = true)
+ |-- se_AMR: double (nullable = true)
+ |-- se_CSA: double (nullable = true)
+ |-- se_EAS: double (nullable = true)
+ |-- se_EUR: double (nullable = true)
+ |-- se_MID: double (nullable = true)
+ |-- neglog10_pval_AFR: double (nullable = true)
+ |-- neglog10_pval_AMR: double (nullable = true)
+ |-- neglog10_pval_CSA: double (nullable = true)
+ |-- neglog10_pval_EAS: double (nullable = true)
+ |-- neglog10_pval_EUR: double (nullable = true)
+ |-- neglog10_pval_MID: double (nullable = true)
+ |-- low_confidence_AFR: string (nullable = true)
+ |-- low_confidence_AMR: string (nullable = true)
+ |-- low_confidence_CSA: string (nullable = true)
+ |-- low_confidence_EAS: string (nullable = true)
+ |-- low_confidence_EUR: string (nullable = true)
+ |-- low_confidence_MID: string (nullable = true)
+
+26/07/31 08:30:44 WARN SparkStringUtils: Truncated the string representation of a plan since it was too large. This behavior can be adjusted by setting 'spark.sql.debug.maxToStringFields'.
+Significant triglyceride variants: 79265
+Joined row count: 79173
+
+Check first 5 rows of z-scores:
++---------------+------------------+--------------------+
+|     variant_id|    z_triglyceride|          z_diabetes|
++---------------+------------------+--------------------+
+|1:10797428:G:GC|0.5724893679662423| -0.3717065799727368|
+| 1:10799577:T:C|0.7395075562231058|-0.33688034796783095|
+| 1:23755513:T:C|-2.078358776769511| 0.16943548569657813|
+| 1:23755716:T:C| -2.07623930014625|  0.1719054054564959|
+| 1:23756155:T:C|-2.075815404821598| 0.17526711116320068|
++---------------+------------------+--------------------+
+only showing top 5 rows
+
+
+Check chromosome-level aggregation:
++---+-----------------------+-------------------+------------------------+------------------------+------------+
+|chr|mean_abs_z_triglyceride|mean_abs_z_diabetes|mean_tg_heterogeneity_hq|mean_db_heterogeneity_hq|num_variants|
++---+-----------------------+-------------------+------------------------+------------------------+------------+
+|  7|     0.9061346601945971| 1.0304948860209675|      0.9910163100654938|      0.5992456381937261|        2901|
+| 18|     1.2318537521963957| 1.2679479916560255|       0.522050378666667|      0.8531723136000007|         375|
+|  9|     0.8443049498764507| 0.6923914092389081|      0.8375006080402004|     0.38583245648241205|         995|
+| 15|     1.0363646646891331| 0.8291511359583331|       1.230541058235293|     0.43164585716577597|        1870|
+| 13|     0.9777863148447864| 0.8052986774534516|      0.6118128736616699|      0.4277231498929335|         467|
+| 14|      1.572648954304633| 0.8224822594513391|       0.954286416666667|     0.41710342592592586|         108|
+|  3|     0.8537677769214549|  0.782261334245784|      0.4460328000411534|     0.40844517271604935|        2430|
+| 22|     0.8126020679430771| 0.7324751006621577|     0.42972097011278215|     0.39829244454887275|        1064|
+| 16|     0.9782408998167724|  0.721744572921553|      0.5556470047789718|     0.37960534928315404|        1674|
+| 17|     0.8238951644310665| 0.7340528106875505|      0.6040715736842098|     0.39332429232781974|        2660|
+|  6|     1.4002083973669421|  0.956876315692632|      0.9109498441541036|       0.552454731189758|       19441|
+|  X|     1.1277967741854722|  1.016788937522198|      0.5423349801302307|      0.6076160416744202|        4300|
+|  1|     0.9181733976137313| 0.9554374610049805|      0.5993807914902813|      0.5529007779999975|        4630|
+| 20|     0.9160965938947665| 1.0822549936270678|      0.4217360750323421|       0.647041736610608|        1546|
+| 21|     0.8779016842219439| 1.4638689988881493|     0.40320070175438594|      0.8714777777777782|         171|
+| 11|       1.17273884831277| 0.7454286008591067|      1.7215345398730753|      0.4053005240834091|        5515|
+|  8|     1.0782116744356456| 0.8003836885009848|       1.012665829595743|     0.44015906687517425|       10711|
+|  5|     1.0647210704094079| 0.6980738793561287|      0.8291566903999988|     0.35150070606315814|        2375|
+| 19|     1.0933318938925085| 0.7765319589670476|      0.9332086791196759|      0.4251426370680252|        2749|
+| 10|     0.8170534477943148| 0.8413687339762407|      0.5106134880212289|      0.4534927888741471|        2638|
+|  4|     1.0174095268796879| 0.8043776915104021|      0.6838013520114953|      0.4336475873850576|        3480|
+| 12|     0.9798700628984942| 0.8555602290347156|      0.6605347432170554|      0.4714567770348834|        2064|
+|  2|     0.9886500576314767| 0.9796408086034287|      0.9307865552006395|      0.5734215298882005|        5009|
++---+-----------------------+-------------------+------------------------+------------------------+------------+
+
+26/07/31 08:54:55 INFO PathOutputCommitterFactory: No output committer factory defined, defaulting to FileOutputCommitterFactory
+26/07/31 08:55:00 INFO PathOutputCommitterFactory: No output committer factory defined, defaulting to FileOutputCommitterFactory
+Batch [f57db9563a26447393a0d0eda265bf0e] finished.
+metadata:
+  '@type': type.googleapis.com/google.cloud.dataproc.v1.BatchOperationMetadata
+  batch: projects/lithe-bonito-499516-f9/locations/us-east1/batches/f57db9563a26447393a0d0eda265bf0e
+  batchUuid: a3aca032-5fc7-4302-9787-060ba286508b
+  createTime: '2026-07-31T08:29:22.446844Z'
+  description: Batch
+  labels:
+    goog-dataproc-batch-id: f57db9563a26447393a0d0eda265bf0e
+    goog-dataproc-batch-uuid: a3aca032-5fc7-4302-9787-060ba286508b
+    goog-dataproc-drz-resource-uuid: batch-a3aca032-5fc7-4302-9787-060ba286508b
+    goog-dataproc-location: us-east1
+  operationType: BATCH
+  warnings:
+  - No runtime version specified. Using the default runtime version. It is recommended
+    to select a specific major.minor runtime version in production, as the default
+    runtime version may change at any time.
+name: projects/lithe-bonito-499516-f9/regions/us-east1/operations/32ebbe1c-b85f-3fae-8ba8-40fb69174135
+exec3: 1558s
+=== Waiting 120s for machines to release ===
+=== Submitting batch with 4 executor(s) ===
+Batch [0a8e7b6de82742dda0e6848981c7bead] submitted.
+WARNING: No runtime version specified. Using the default runtime version. It is recommended to select a specific major.minor runtime version in production, as the default runtime version may change at any time.
+Using the default container image
+Waiting for container log creation
+PYSPARK_PYTHON=/opt/dataproc/conda/bin/python
+Generating /home/spark/.pip/pip.conf
+Configuring index-url as 'https://us-python.pkg.dev/artifact-registry-python-cache/virtual-python/simple/'
+JAVA_HOME=/usr/lib/jvm/temurin-17-jdk-amd64
+SPARK_EXTRA_CLASSPATH=
+:: loading settings :: file = /etc/spark/conf/ivysettings.xml
+26/07/31 08:58:30 WARN MetricsConfig: Cannot locate configuration: tried hadoop-metrics2-google-hadoop-file-system.properties,hadoop-metrics2.properties
+26/07/31 08:58:30 INFO MetricsSystemImpl: Scheduled Metric snapshot period at 10 second(s).
+26/07/31 08:58:30 INFO MetricsSystemImpl: google-hadoop-file-system metrics system started
+root
+ |-- chr: string (nullable = true)
+ |-- pos: integer (nullable = true)
+ |-- ref: string (nullable = true)
+ |-- alt: string (nullable = true)
+ |-- af_meta_hq: double (nullable = true)
+ |-- beta_meta_hq: double (nullable = true)
+ |-- se_meta_hq: double (nullable = true)
+ |-- neglog10_pval_meta_hq: double (nullable = true)
+ |-- neglog10_pval_heterogeneity_hq: double (nullable = true)
+ |-- af_meta: double (nullable = true)
+ |-- beta_meta: double (nullable = true)
+ |-- se_meta: double (nullable = true)
+ |-- neglog10_pval_meta: double (nullable = true)
+ |-- neglog10_pval_heterogeneity: double (nullable = true)
+ |-- af_AFR: double (nullable = true)
+ |-- af_AMR: double (nullable = true)
+ |-- af_CSA: double (nullable = true)
+ |-- af_EAS: double (nullable = true)
+ |-- af_EUR: double (nullable = true)
+ |-- af_MID: double (nullable = true)
+ |-- beta_AFR: double (nullable = true)
+ |-- beta_AMR: double (nullable = true)
+ |-- beta_CSA: double (nullable = true)
+ |-- beta_EAS: double (nullable = true)
+ |-- beta_EUR: double (nullable = true)
+ |-- beta_MID: double (nullable = true)
+ |-- se_AFR: double (nullable = true)
+ |-- se_AMR: double (nullable = true)
+ |-- se_CSA: double (nullable = true)
+ |-- se_EAS: double (nullable = true)
+ |-- se_EUR: double (nullable = true)
+ |-- se_MID: double (nullable = true)
+ |-- neglog10_pval_AFR: double (nullable = true)
+ |-- neglog10_pval_AMR: double (nullable = true)
+ |-- neglog10_pval_CSA: double (nullable = true)
+ |-- neglog10_pval_EAS: double (nullable = true)
+ |-- neglog10_pval_EUR: double (nullable = true)
+ |-- neglog10_pval_MID: double (nullable = true)
+ |-- low_confidence_AFR: string (nullable = true)
+ |-- low_confidence_AMR: string (nullable = true)
+ |-- low_confidence_CSA: string (nullable = true)
+ |-- low_confidence_EAS: string (nullable = true)
+ |-- low_confidence_EUR: string (nullable = true)
+ |-- low_confidence_MID: string (nullable = true)
+
+26/07/31 08:58:36 WARN SparkStringUtils: Truncated the string representation of a plan since it was too large. This behavior can be adjusted by setting 'spark.sql.debug.maxToStringFields'.
+Significant triglyceride variants: 79265
+Joined row count: 79173
+
+Check first 5 rows of z-scores:
++---------------+------------------+--------------------+
+|     variant_id|    z_triglyceride|          z_diabetes|
++---------------+------------------+--------------------+
+|1:10797428:G:GC|0.5724893679662423| -0.3717065799727368|
+| 1:10799577:T:C|0.7395075562231058|-0.33688034796783095|
+| 1:23755513:T:C|-2.078358776769511| 0.16943548569657813|
+| 1:23755716:T:C| -2.07623930014625|  0.1719054054564959|
+| 1:23756155:T:C|-2.075815404821598| 0.17526711116320068|
++---------------+------------------+--------------------+
+only showing top 5 rows
+
+
+Check chromosome-level aggregation:
++---+-----------------------+-------------------+------------------------+------------------------+------------+
+|chr|mean_abs_z_triglyceride|mean_abs_z_diabetes|mean_tg_heterogeneity_hq|mean_db_heterogeneity_hq|num_variants|
++---+-----------------------+-------------------+------------------------+------------------------+------------+
+|  7|     0.9061346601945971| 1.0304948860209675|      0.9910163100654938|      0.5992456381937261|        2901|
+| 18|     1.2318537521963957| 1.2679479916560255|       0.522050378666667|      0.8531723136000007|         375|
+|  9|     0.8443049498764507| 0.6923914092389081|      0.8375006080402004|     0.38583245648241205|         995|
+| 15|     1.0363646646891331| 0.8291511359583331|       1.230541058235293|     0.43164585716577597|        1870|
+| 13|     0.9777863148447864| 0.8052986774534516|      0.6118128736616699|      0.4277231498929335|         467|
+| 14|      1.572648954304633| 0.8224822594513391|       0.954286416666667|     0.41710342592592586|         108|
+|  3|     0.8537677769214549|  0.782261334245784|      0.4460328000411534|     0.40844517271604935|        2430|
+| 22|     0.8126020679430771| 0.7324751006621577|     0.42972097011278215|     0.39829244454887275|        1064|
+| 16|     0.9782408998167724|  0.721744572921553|      0.5556470047789718|     0.37960534928315404|        1674|
+| 17|     0.8238951644310665| 0.7340528106875505|      0.6040715736842098|     0.39332429232781974|        2660|
+|  6|     1.4002083973669421|  0.956876315692632|      0.9109498441541036|       0.552454731189758|       19441|
+|  X|     1.1277967741854722|  1.016788937522198|      0.5423349801302307|      0.6076160416744202|        4300|
+|  1|     0.9181733976137313| 0.9554374610049805|      0.5993807914902813|      0.5529007779999975|        4630|
+| 20|     0.9160965938947665| 1.0822549936270678|      0.4217360750323421|       0.647041736610608|        1546|
+| 21|     0.8779016842219439| 1.4638689988881493|     0.40320070175438594|      0.8714777777777782|         171|
+| 11|       1.17273884831277| 0.7454286008591067|      1.7215345398730753|      0.4053005240834091|        5515|
+|  8|     1.0782116744356456| 0.8003836885009848|       1.012665829595743|     0.44015906687517425|       10711|
+|  5|     1.0647210704094079| 0.6980738793561287|      0.8291566903999988|     0.35150070606315814|        2375|
+| 19|     1.0933318938925085| 0.7765319589670476|      0.9332086791196759|      0.4251426370680252|        2749|
+| 10|     0.8170534477943148| 0.8413687339762407|      0.5106134880212289|      0.4534927888741471|        2638|
+|  4|     1.0174095268796879| 0.8043776915104021|      0.6838013520114953|      0.4336475873850576|        3480|
+| 12|     0.9798700628984942| 0.8555602290347156|      0.6605347432170554|      0.4714567770348834|        2064|
+|  2|     0.9886500576314767| 0.9796408086034287|      0.9307865552006395|      0.5734215298882005|        5009|
++---+-----------------------+-------------------+------------------------+------------------------+------------+
+
+26/07/31 09:22:27 INFO PathOutputCommitterFactory: No output committer factory defined, defaulting to FileOutputCommitterFactory
+26/07/31 09:22:33 INFO PathOutputCommitterFactory: No output committer factory defined, defaulting to FileOutputCommitterFactory
+Batch [0a8e7b6de82742dda0e6848981c7bead] finished.
+metadata:
+  '@type': type.googleapis.com/google.cloud.dataproc.v1.BatchOperationMetadata
+  batch: projects/lithe-bonito-499516-f9/locations/us-east1/batches/0a8e7b6de82742dda0e6848981c7bead
+  batchUuid: bd64b649-b9bc-4dee-b12d-6d01f38c1eff
+  createTime: '2026-07-31T08:57:19.697158Z'
+  description: Batch
+  labels:
+    goog-dataproc-batch-id: 0a8e7b6de82742dda0e6848981c7bead
+    goog-dataproc-batch-uuid: bd64b649-b9bc-4dee-b12d-6d01f38c1eff
+    goog-dataproc-drz-resource-uuid: batch-bd64b649-b9bc-4dee-b12d-6d01f38c1eff
+    goog-dataproc-location: us-east1
+  operationType: BATCH
+  warnings:
+  - No runtime version specified. Using the default runtime version. It is recommended
+    to select a specific major.minor runtime version in production, as the default
+    runtime version may change at any time.
+name: projects/lithe-bonito-499516-f9/regions/us-east1/operations/9aba1e7b-0358-3b6d-bebd-b8f5d858c59a
+exec4: 1530s
+
