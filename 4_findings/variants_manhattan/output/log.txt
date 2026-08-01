@@ -1,0 +1,128 @@
+Batch [57ea4728fdd744fd9ea001d1bc15ee7d] submitted.
+WARNING: No runtime version specified. Using the default runtime version. It is recommended to select a specific major.minor runtime version in production, as the default runtime version may change at any time.
+Using the default container image
+Waiting for container log creation
+PYSPARK_PYTHON=/opt/dataproc/conda/bin/python
+Generating /home/spark/.pip/pip.conf
+Configuring index-url as 'https://us-python.pkg.dev/artifact-registry-python-cache/virtual-python/simple/'
+JAVA_HOME=/usr/lib/jvm/temurin-17-jdk-amd64
+SPARK_EXTRA_CLASSPATH=
+:: loading settings :: file = /etc/spark/conf/ivysettings.xml
+26/08/01 18:59:45 WARN MetricsConfig: Cannot locate configuration: tried hadoop-metrics2-google-hadoop-file-system.properties,hadoop-metrics2.properties
+26/08/01 18:59:45 INFO MetricsSystemImpl: Scheduled Metric snapshot period at 10 second(s).
+26/08/01 18:59:45 INFO MetricsSystemImpl: google-hadoop-file-system metrics system started
+root
+ |-- chr: string (nullable = true)
+ |-- pos: integer (nullable = true)
+ |-- ref: string (nullable = true)
+ |-- alt: string (nullable = true)
+ |-- af_meta_hq: string (nullable = true)
+ |-- beta_meta_hq: string (nullable = true)
+ |-- se_meta_hq: string (nullable = true)
+ |-- neglog10_pval_meta_hq: string (nullable = true)
+ |-- neglog10_pval_heterogeneity_hq: string (nullable = true)
+ |-- af_meta: string (nullable = true)
+ |-- beta_meta: string (nullable = true)
+ |-- se_meta: string (nullable = true)
+ |-- neglog10_pval_meta: string (nullable = true)
+ |-- neglog10_pval_heterogeneity: string (nullable = true)
+ |-- af_AFR: string (nullable = true)
+ |-- af_AMR: string (nullable = true)
+ |-- af_CSA: string (nullable = true)
+ |-- af_EAS: string (nullable = true)
+ |-- af_EUR: string (nullable = true)
+ |-- af_MID: string (nullable = true)
+ |-- beta_AFR: string (nullable = true)
+ |-- beta_AMR: string (nullable = true)
+ |-- beta_CSA: string (nullable = true)
+ |-- beta_EAS: string (nullable = true)
+ |-- beta_EUR: string (nullable = true)
+ |-- beta_MID: string (nullable = true)
+ |-- se_AFR: string (nullable = true)
+ |-- se_AMR: string (nullable = true)
+ |-- se_CSA: string (nullable = true)
+ |-- se_EAS: string (nullable = true)
+ |-- se_EUR: string (nullable = true)
+ |-- se_MID: string (nullable = true)
+ |-- neglog10_pval_AFR: string (nullable = true)
+ |-- neglog10_pval_AMR: string (nullable = true)
+ |-- neglog10_pval_CSA: string (nullable = true)
+ |-- neglog10_pval_EAS: string (nullable = true)
+ |-- neglog10_pval_EUR: string (nullable = true)
+ |-- neglog10_pval_MID: string (nullable = true)
+ |-- low_confidence_AFR: string (nullable = true)
+ |-- low_confidence_AMR: string (nullable = true)
+ |-- low_confidence_CSA: string (nullable = true)
+ |-- low_confidence_EAS: string (nullable = true)
+ |-- low_confidence_EUR: string (nullable = true)
+ |-- low_confidence_MID: string (nullable = true)
+
+root
+ |-- chr: string (nullable = true)
+ |-- pos: integer (nullable = true)
+ |-- ref: string (nullable = true)
+ |-- alt: string (nullable = true)
+ |-- af_cases_meta_hq: string (nullable = true)
+ |-- af_controls_meta_hq: string (nullable = true)
+ |-- beta_meta_hq: string (nullable = true)
+ |-- se_meta_hq: string (nullable = true)
+ |-- neglog10_pval_meta_hq: string (nullable = true)
+ |-- neglog10_pval_heterogeneity_hq: string (nullable = true)
+ |-- af_cases_meta: string (nullable = true)
+ |-- af_controls_meta: string (nullable = true)
+ |-- beta_meta: string (nullable = true)
+ |-- se_meta: string (nullable = true)
+ |-- neglog10_pval_meta: string (nullable = true)
+ |-- neglog10_pval_heterogeneity: string (nullable = true)
+ |-- af_cases_AFR: string (nullable = true)
+ |-- af_cases_CSA: string (nullable = true)
+ |-- af_cases_EAS: string (nullable = true)
+ |-- af_cases_EUR: string (nullable = true)
+ |-- af_cases_MID: string (nullable = true)
+ |-- af_controls_AFR: string (nullable = true)
+ |-- af_controls_CSA: string (nullable = true)
+ |-- af_controls_EAS: string (nullable = true)
+ |-- af_controls_EUR: string (nullable = true)
+ |-- af_controls_MID: string (nullable = true)
+ |-- beta_AFR: string (nullable = true)
+ |-- beta_CSA: string (nullable = true)
+ |-- beta_EAS: string (nullable = true)
+ |-- beta_EUR: string (nullable = true)
+ |-- beta_MID: string (nullable = true)
+ |-- se_AFR: string (nullable = true)
+ |-- se_CSA: string (nullable = true)
+ |-- se_EAS: string (nullable = true)
+ |-- se_EUR: string (nullable = true)
+ |-- se_MID: string (nullable = true)
+ |-- neglog10_pval_AFR: string (nullable = true)
+ |-- neglog10_pval_CSA: string (nullable = true)
+ |-- neglog10_pval_EAS: string (nullable = true)
+ |-- neglog10_pval_EUR: string (nullable = true)
+ |-- neglog10_pval_MID: string (nullable = true)
+ |-- low_confidence_AFR: string (nullable = true)
+ |-- low_confidence_CSA: string (nullable = true)
+ |-- low_confidence_EAS: string (nullable = true)
+ |-- low_confidence_EUR: string (nullable = true)
+ |-- low_confidence_MID: string (nullable = true)
+
+26/08/01 19:07:45 WARN SparkStringUtils: Truncated the string representation of a plan since it was too large. This behavior can be adjusted by setting 'spark.sql.debug.maxToStringFields'.
+26/08/01 19:07:45 INFO PathOutputCommitterFactory: No output committer factory defined, defaulting to FileOutputCommitterFactory
+26/08/01 19:11:36 INFO PathOutputCommitterFactory: No output committer factory defined, defaulting to FileOutputCommitterFactory
+Batch [57ea4728fdd744fd9ea001d1bc15ee7d] finished.
+metadata:
+  '@type': type.googleapis.com/google.cloud.dataproc.v1.BatchOperationMetadata
+  batch: projects/lithe-bonito-499516-f9/locations/us-central1/batches/57ea4728fdd744fd9ea001d1bc15ee7d
+  batchUuid: cf0d170f-70b7-4be9-a0c3-7bb2386dd6c6
+  createTime: '2026-08-01T18:58:23.010455Z'
+  description: Batch
+  labels:
+    goog-dataproc-batch-id: 57ea4728fdd744fd9ea001d1bc15ee7d
+    goog-dataproc-batch-uuid: cf0d170f-70b7-4be9-a0c3-7bb2386dd6c6
+    goog-dataproc-drz-resource-uuid: batch-cf0d170f-70b7-4be9-a0c3-7bb2386dd6c6
+    goog-dataproc-location: us-central1
+  operationType: BATCH
+  warnings:
+  - No runtime version specified. Using the default runtime version. It is recommended
+    to select a specific major.minor runtime version in production, as the default
+    runtime version may change at any time.
+name: projects/lithe-bonito-499516-f9/regions/us-central1/operations/9ebaa50e-0c15-3058-83af-1f2ecbaaa2f6
