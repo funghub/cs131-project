@@ -1,0 +1,110 @@
+---
+title: "create manhattan plots"
+output: html_notebook
+---
+```{r}
+# Load the libraries
+# install.packages("qqman")
+# install.packages("dplyr")
+# Load the dplyr and qqman
+library(dplyr)
+library(qqman)
+```
+
+
+```{r}
+tg_path <- "data/tg_for_manhattan.csv"
+db_path <- "data/db_for_manhattan.csv"
+
+tg <- read.csv(tg_path)
+db <- read.csv(db_path)
+```
+
+```{r}
+# Quick view both datasets triglycerides and diabetes
+head(tg)
+head(db)
+```
+
+```{r}
+## Triglyceride Dataset
+print('Triglyceride Dataset')
+# check if NA still exists in chr rows
+unique(tg$chr)
+
+# Filter out rows with NA in chr
+tg_dataframe <- tg %>% filter(tg$chr != 'NA')
+
+# Replace 'X' in chr to 23
+tg_dataframe$chr[ tg_dataframe$chr == 'X' ] <- "23"
+
+# check if NA still exists in chr rows
+unique(tg_dataframe$chr)
+
+
+## Diabetes Dataset
+print("Diabetes Dataset")
+# check if NA still exists in chr rows
+unique(db$chr)
+
+# Filter out rows with NA in chr and p_val (there are none in db set)
+db_dataframe <- db %>% filter(db$chr != 'NA')
+
+# Replace 'X' in chr to 23
+db_dataframe$chr[ db_dataframe$chr == 'X' ] <- "23"
+
+# check if NA still exists in chr rows
+unique(db_dataframe$chr)
+```
+
+```{r}
+class(tg_dataframe$chr)
+class(db_dataframe$chr)
+
+# convert to numeric
+tg_dataframe$chr <- as.numeric(tg_dataframe$chr)
+db_dataframe$chr <- as.numeric(db_dataframe$chr)
+
+class(tg_dataframe$chr)
+class(db_dataframe$chr)
+```
+```{r}
+# check pval_EUR if any y axis value on manhattan plot are infinite
+any(is.infinite(-log10(tg_dataframe$pval_EUR)))
+max(-log10(tg_dataframe$pval_EUR), na.rm = TRUE)
+```
+```{r}
+# check the range of my p values in EUR (see 0)
+range(tg_dataframe$pval_EUR, na.rm = TRUE)
+range
+```
+
+```{r}
+# Replace 0 values for p-value in datasets with lowest value in pval
+min_nonzero_EUR <- min(tg_dataframe$pval_EUR[tg_dataframe$pval_EUR > 0], na.rm = TRUE)
+tg_dataframe$pval_EUR[tg_dataframe$pval_EUR == 0] <- min_nonzero_EUR
+
+min_nonzero_CSA <- min(tg_dataframe$pval_CSA[tg_dataframe$pval_CSA > 0], na.rm = TRUE)
+tg_dataframe$pval_CSA[tg_dataframe$pval_CSA == 0] <- min_nonzero_CSA
+
+
+min_nonzero_EUR <- min(db_dataframe$pval_EUR[db_dataframe$pval_EUR > 0], na.rm = TRUE)
+db_dataframe$pval_EUR[db_dataframe$pval_EUR == 0] <- min_nonzero_EUR
+
+min_nonzero_CSA <- min(db_dataframe$pval_CSA[db_dataframe$pval_CSA > 0], na.rm = TRUE)
+db_dataframe$pval_CSA[db_dataframe$pval_CSA == 0] <- min_nonzero_CSA
+```
+
+```{r}
+# Make the Manhattan plot on the triglyceride EUR
+manhattan(tg_dataframe, chr="chr", bp="pos", snp="variant_id", p="pval_EUR")
+```
+
+
+```{r}
+# Make the Manhattan plot on the triglyceride EUR
+manhattan(tg_dataframe, chr="chr", bp="pos", snp="variant_id", p="pval_EUR", ylim = c(0, 10))
+```
+
+
+
