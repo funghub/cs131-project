@@ -14,7 +14,8 @@ DB_INPUT=$BUCKET/icd10-E11-both_sexes.tsv.gz
 
 # change this to the script on your local
 #SCRIPT=./scaling.py
-SCRIPT=./extract_data.py
+#SCRIPT=./extract_data_pval.py
+SCRIPT=./extract_data_neglog.py
 
 #OUTPUT_LOG_CLOUD=./$BUCKET/output/log.txt
 OUTPUT_LOG_LOCAL=./output/log.txt
