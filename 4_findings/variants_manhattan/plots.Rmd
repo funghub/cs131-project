@@ -78,21 +78,40 @@ max(-log10(tg_dataframe$pval_EUR), na.rm = TRUE)
 range(tg_dataframe$pval_EUR, na.rm = TRUE)
 range
 ```
+```{r}
+# Check how many are 0 = pvalue in the dataset
 
+sum(tg_dataframe$pval_EUR == 0)
+sum(tg_dataframe$pval_CSA == 0)
+
+sum(db_dataframe$pval_EUR == 0)
+sum(db_dataframe$pval_CSA == 0)
+```
 ```{r}
 # Replace 0 values for p-value in datasets with lowest value in pval
-min_nonzero_EUR <- min(tg_dataframe$pval_EUR[tg_dataframe$pval_EUR > 0], na.rm = TRUE)
-tg_dataframe$pval_EUR[tg_dataframe$pval_EUR == 0] <- min_nonzero_EUR
+# min_nonzero_EUR <- min(tg_dataframe$pval_EUR[tg_dataframe$pval_EUR > 0], na.rm = TRUE)
+# tg_dataframe$pval_EUR[tg_dataframe$pval_EUR == 0] <- min_nonzero_EUR
 
-min_nonzero_CSA <- min(tg_dataframe$pval_CSA[tg_dataframe$pval_CSA > 0], na.rm = TRUE)
-tg_dataframe$pval_CSA[tg_dataframe$pval_CSA == 0] <- min_nonzero_CSA
+# min_nonzero_CSA <- min(tg_dataframe$pval_CSA[tg_dataframe$pval_CSA > 0], na.rm = TRUE)
+# tg_dataframe$pval_CSA[tg_dataframe$pval_CSA == 0] <- min_nonzero_CSA
 
 
-min_nonzero_EUR <- min(db_dataframe$pval_EUR[db_dataframe$pval_EUR > 0], na.rm = TRUE)
-db_dataframe$pval_EUR[db_dataframe$pval_EUR == 0] <- min_nonzero_EUR
+# min_nonzero_EUR <- min(db_dataframe$pval_EUR[db_dataframe$pval_EUR > 0], na.rm = TRUE)
+# db_dataframe$pval_EUR[db_dataframe$pval_EUR == 0] <- min_nonzero_EUR
 
-min_nonzero_CSA <- min(db_dataframe$pval_CSA[db_dataframe$pval_CSA > 0], na.rm = TRUE)
-db_dataframe$pval_CSA[db_dataframe$pval_CSA == 0] <- min_nonzero_CSA
+# min_nonzero_CSA <- min(db_dataframe$pval_CSA[db_dataframe$pval_CSA > 0], na.rm = TRUE)
+# db_dataframe$pval_CSA[db_dataframe$pval_CSA == 0] <- min_nonzero_CSA
+```
+
+```{r}
+# instead of replacing the 0 p-values with the min p-value
+# just filter out the 0 p-values, to prevent infinite -log10(p)=x
+# Filter 0 values only for triglyceride EUR b/c only this has pvalue=0
+tg_dataframe <- tg_dataframe %>%
+  filter(tg_dataframe$pval_EUR != 0)
+
+# confirm no more 0s in pval_EUR
+sum(tg_dataframe$pval_EUR == 0)
 ```
 ```{r}
 # Get top 10 pval
@@ -190,3 +209,21 @@ write.csv(tg_top_CSA, "./output/top_SNPs/triglyceride_CSA_top.csv", row.names=FA
 write.csv(db_top_EUR, "./output/top_SNPs/diabetes_EUR_top.csv", row.names=FALSE)
 write.csv(db_top_CSA, "./output/top_SNPs/diabetes_CSA_top.csv", row.names=FALSE)
 ```
+
+# Generate the QQ Plots
+```{r}
+# QQ Plots
+# Triglycerides
+qq(tg_dataframe$pval_EUR, main = "Q-Q Plot Triglyceride European Population")
+```
+```{r}
+qq(tg_dataframe$pval_CSA, main = "Q-Q Plot Triglyceride Central/South Asian Population")
+```
+```{r}
+# Diabetes
+qq(db_dataframe$pval_EUR, main = "Q-Q Plot Diabetes European Population")
+```
+```{r}
+qq(db_dataframe$pval_CSA, main = "Q-Q Plot Diabetes Central/South Asian Population")
+```
+
