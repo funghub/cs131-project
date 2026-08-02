@@ -94,17 +94,99 @@ db_dataframe$pval_EUR[db_dataframe$pval_EUR == 0] <- min_nonzero_EUR
 min_nonzero_CSA <- min(db_dataframe$pval_CSA[db_dataframe$pval_CSA > 0], na.rm = TRUE)
 db_dataframe$pval_CSA[db_dataframe$pval_CSA == 0] <- min_nonzero_CSA
 ```
+```{r}
+# Get top 10 pval
+
+## Triglycerides
+# get top 5 for EUR
+tg_top_EUR <- tg_dataframe %>%
+  group_by(chr) %>%
+  arrange(pval_EUR) %>%
+  slice(1:5) %>% # get the top 5 from each group/chr
+  ungroup()
+
+# get top 5 for CSA
+tg_top_CSA <- tg_dataframe %>%
+  group_by(chr) %>%
+  arrange(pval_CSA) %>%
+  slice(1:5) %>%  # get the top 5 from each group/chr
+  ungroup()
+
+## Diabetes
+# get top 5 for EUR
+db_top_EUR <- db_dataframe %>%
+  group_by(chr) %>%
+  arrange(pval_EUR) %>%
+  slice(1:5) %>% # get the top 5 from each group/chr
+  ungroup()
+
+# get top 5 for CSA
+db_top_CSA <- db_dataframe %>%
+  group_by(chr) %>%
+  arrange(pval_CSA) %>%
+  slice(1:5) %>%  # get the top 5 from each group/chr
+  ungroup()
+```
+
+```{r}
+# Get SNP of Interests
+snpsOfInterest_tg_EUR <- tg_top_EUR$variant_id
+snpsOfInterest_tg_CSA <- tg_top_CSA$variant_id
+snpsOfInterest_db_EUR <- db_top_EUR$variant_id
+snpsOfInterest_db_CSA <- db_top_CSA$variant_id
+```
 
 ```{r}
 # Make the Manhattan plot on the triglyceride EUR
-manhattan(tg_dataframe, chr="chr", bp="pos", snp="variant_id", p="pval_EUR")
+manhattan(tg_dataframe, main = "Manhattan Plot Triglyceride European Population", 
+          chr="chr", bp="pos", snp="variant_id", p="pval_EUR",
+          cex=0.6, # point size
+          cex.axis = 0.9, # axes labels size
+          col = c("blue4", "orange3"), # alternate col colors
+          chrlabs = c(1:22,"X"), # insert column names, replace 23 with X
+          # annotatePval = 0.01,
+          highlight = snpsOfInterest_tg_EUR
+          )
 ```
-
-
 ```{r}
-# Make the Manhattan plot on the triglyceride EUR
-manhattan(tg_dataframe, chr="chr", bp="pos", snp="variant_id", p="pval_EUR", ylim = c(0, 10))
+# Make the Manhattan plot on the triglyceride CSA
+manhattan(tg_dataframe, main = "Manhattan Plot Triglyceride Central/South Asian Population", 
+          chr="chr", bp="pos", snp="variant_id", p="pval_CSA",
+          cex=0.6, # point size
+          cex.axis = 0.9, # axes labels size
+          col = c("blue4", "orange3"), # alternate col colors
+          chrlabs = c(1:22,"X"), # insert column names, replace 23 with X
+          highlight = snpsOfInterest_tg_CSA
+          )
 ```
+```{r}
+# Make the Manhattan plot on the diabetes EUR
+manhattan(db_dataframe, main = "Manhattan Plot Diabetes European Population", 
+          chr="chr", bp="pos", snp="variant_id", p="pval_EUR",
+          cex=0.6, # point size
+          cex.axis = 0.9, # axes labels size
+          col = c("blue4", "orange3"), # alternate col colors
+          chrlabs = c(1:22,"X"), # insert column names, replace 23 with X
+          highlight = snpsOfInterest_db_EUR
+          )
+```
+```{r}
+# Make the Manhattan plot on the diabetes CSA
+manhattan(db_dataframe, main = "Manhattan Plot Diabetes Central/South Asian Population", 
+          chr="chr", bp="pos", snp="variant_id", p="pval_CSA",
+          cex=0.6, # point size
+          cex.axis = 0.9, # axes labels size
+          col = c("blue4", "orange3"), # alternate col colors
+          chrlabs = c(1:22,"X"), # insert column names, replace 23 with X
+          highlight = snpsOfInterest_db_CSA
+          )
+```
+```{r}
+# Export the top 5 SNPs with lowest p-values per chromosome
 
+write.csv(tg_top_EUR, "./output/top_SNPs/triglyceride_EUR_top.csv", row.names=FALSE)
+write.csv(tg_top_CSA, "./output/top_SNPs/triglyceride_CSA_top.csv", row.names=FALSE)
 
-
+write.csv(db_top_EUR, "./output/top_SNPs/diabetes_EUR_top.csv", row.names=FALSE)
+write.csv(db_top_CSA, "./output/top_SNPs/diabetes_CSA_top.csv", row.names=FALSE)
+```
