@@ -4,5 +4,5 @@ icd10-E11-both_sexes.tsv
 icd10-E11-both_sexes.tsv.bgz
 4_findings/variants_manhattan/data
 .Rproj.user
-4_findings/variants_manhattan/plots.nb.html
+#4_findings/variants_manhattan/plots.nb.html
 4_findings/variants_manhattan/.Rhistory
