@@ -1,8 +1,3 @@
 === Submitting batch with 2 executor(s) ===
 === Submitting batch with 2 executor(s) ===
 === Submitting batch with 2 executor(s) ===
-exec2: 294s
-=== Waiting 120s for machines to release ===
-=== Submitting batch with 2 executor(s) ===
-exec2: 1048s
-=== Waiting 120s for machines to release ===

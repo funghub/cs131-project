@@ -1,4 +1,4 @@
-Batch [cd03f19867a9465a974d39e3f540ca6f] submitted.
+Batch [57ea4728fdd744fd9ea001d1bc15ee7d] submitted.
 WARNING: No runtime version specified. Using the default runtime version. It is recommended to select a specific major.minor runtime version in production, as the default runtime version may change at any time.
 Using the default container image
 Waiting for container log creation
@@ -8,9 +8,9 @@ Configuring index-url as 'https://us-python.pkg.dev/artifact-registry-python-cac
 JAVA_HOME=/usr/lib/jvm/temurin-17-jdk-amd64
 SPARK_EXTRA_CLASSPATH=
 :: loading settings :: file = /etc/spark/conf/ivysettings.xml
-26/08/02 02:44:54 WARN MetricsConfig: Cannot locate configuration: tried hadoop-metrics2-google-hadoop-file-system.properties,hadoop-metrics2.properties
-26/08/02 02:44:54 INFO MetricsSystemImpl: Scheduled Metric snapshot period at 10 second(s).
-26/08/02 02:44:54 INFO MetricsSystemImpl: google-hadoop-file-system metrics system started
+26/08/01 18:59:45 WARN MetricsConfig: Cannot locate configuration: tried hadoop-metrics2-google-hadoop-file-system.properties,hadoop-metrics2.properties
+26/08/01 18:59:45 INFO MetricsSystemImpl: Scheduled Metric snapshot period at 10 second(s).
+26/08/01 18:59:45 INFO MetricsSystemImpl: google-hadoop-file-system metrics system started
 root
  |-- chr: string (nullable = true)
  |-- pos: integer (nullable = true)
@@ -105,18 +105,24 @@ root
  |-- low_confidence_EUR: string (nullable = true)
  |-- low_confidence_MID: string (nullable = true)
 
-26/08/02 02:52:10 WARN SparkStringUtils: Truncated the string representation of a plan since it was too large. This behavior can be adjusted by setting 'spark.sql.debug.maxToStringFields'.
-26/08/02 02:52:11 INFO PathOutputCommitterFactory: No output committer factory defined, defaulting to FileOutputCommitterFactory
-26/08/02 02:54:53 INFO PathOutputCommitterFactory: No output committer factory defined, defaulting to FileOutputCommitterFactory
-Traceback (most recent call last):
-  File "/var/dataproc/tmp/srvls-batch-bad1ff18-e210-4c57-9217-3f0dd6bb43c3/extract_data_test.py", line 79, in <module>
-    top10_tg_EUR = tg_selected.order("neglog10_pval_EUR", decreasing = TRUE).limit(5)
-                   ^^^^^^^^^^^^^^^^^
-  File "/usr/lib/spark/python/lib/pyspark.zip/pyspark/sql/dataframe.py", line 3127, in __getattr__
-AttributeError: 'DataFrame' object has no attribute 'order'. Did you mean: 'orderBy'?
-ERROR: (gcloud.dataproc.batches.submit.pyspark) Batch job is FAILED. Detail: Job failed with message [AttributeError: 'DataFrame' object has no attribute 'order'. Did you mean: 'orderBy'?]. Additional details can be found at:
-https://console.cloud.google.com/dataproc/batches/us-central1/cd03f19867a9465a974d39e3f540ca6f?project=lithe-bonito-499516-f9
-gcloud dataproc batches wait 'cd03f19867a9465a974d39e3f540ca6f' --region 'us-central1' --project 'lithe-bonito-499516-f9'
-https://console.cloud.google.com/storage/browser/dataproc-staging-us-central1-333818248406-xqoxlsup/google-cloud-dataproc-metainfo/952017ba-da56-43eb-b25e-f573f9f12679/jobs/srvls-batch-bad1ff18-e210-4c57-9217-3f0dd6bb43c3/
-gs://dataproc-staging-us-central1-333818248406-xqoxlsup/google-cloud-dataproc-metainfo/952017ba-da56-43eb-b25e-f573f9f12679/jobs/srvls-batch-bad1ff18-e210-4c57-9217-3f0dd6bb43c3/driveroutput.*.
-Running auto diagnostics on the batch. It may take few minutes before diagnostics output is available. Please check diagnostics output by running 'gcloud dataproc batches describe' command.
+26/08/01 19:07:45 WARN SparkStringUtils: Truncated the string representation of a plan since it was too large. This behavior can be adjusted by setting 'spark.sql.debug.maxToStringFields'.
+26/08/01 19:07:45 INFO PathOutputCommitterFactory: No output committer factory defined, defaulting to FileOutputCommitterFactory
+26/08/01 19:11:36 INFO PathOutputCommitterFactory: No output committer factory defined, defaulting to FileOutputCommitterFactory
+Batch [57ea4728fdd744fd9ea001d1bc15ee7d] finished.
+metadata:
+  '@type': type.googleapis.com/google.cloud.dataproc.v1.BatchOperationMetadata
+  batch: projects/lithe-bonito-499516-f9/locations/us-central1/batches/57ea4728fdd744fd9ea001d1bc15ee7d
+  batchUuid: cf0d170f-70b7-4be9-a0c3-7bb2386dd6c6
+  createTime: '2026-08-01T18:58:23.010455Z'
+  description: Batch
+  labels:
+    goog-dataproc-batch-id: 57ea4728fdd744fd9ea001d1bc15ee7d
+    goog-dataproc-batch-uuid: cf0d170f-70b7-4be9-a0c3-7bb2386dd6c6
+    goog-dataproc-drz-resource-uuid: batch-cf0d170f-70b7-4be9-a0c3-7bb2386dd6c6
+    goog-dataproc-location: us-central1
+  operationType: BATCH
+  warnings:
+  - No runtime version specified. Using the default runtime version. It is recommended
+    to select a specific major.minor runtime version in production, as the default
+    runtime version may change at any time.
+name: projects/lithe-bonito-499516-f9/regions/us-central1/operations/9ebaa50e-0c15-3058-83af-1f2ecbaaa2f6

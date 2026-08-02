@@ -58,4 +58,21 @@ db_selected = db_newcols.select("chr", "pos", "variant_id", "pval_EUR", "pval_CS
 tg_selected.write.mode("overwrite").option("header", "true").csv(OUTPUT_PATH + "tg_for_manhattan")
 db_selected.write.mode("overwrite").option("header", "true").csv(OUTPUT_PATH + "db_for_manhattan")
 
+
+# Obtain the Top 10 pval (smallest) in each dataset for each population for each chromosome
+#top10_tg_EUR = tg_selected.orderBy("pval_EUR").limit(10)
+#print("Show Triglyceride Dataset EUR:")
+#top10_tg_EUR.show()
+#top10_tg_CSA = tg_selected.orderBy("pval_CSA").limit(10)
+#print("Show Triglyceride Dataset CSA:")
+#top10_tg_CSA.show()
+
+#top10_db_EUR = db_selected.orderBy("pval_EUR").limit(10)
+#print("\nShow Diabetes Dataset EUR:")
+#top10_db_EUR.show()
+#top10_db_CSA = db_selected.orderBy("pval_CSA").limit(10)
+#print("Show Diabetes Dataset CSA:")
+#top10_db_CSA.show()
+
+
 spark.stop()

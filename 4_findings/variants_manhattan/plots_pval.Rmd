@@ -1,0 +1,229 @@
+---
+title: "create manhattan plots"
+output: html_notebook
+---
+```{r}
+# Load the libraries
+# install.packages("qqman")
+# install.packages("dplyr")
+# Load the dplyr and qqman
+library(dplyr)
+library(qqman)
+```
+
+
+```{r}
+tg_path <- "data/tg_for_manhattan.csv"
+db_path <- "data/db_for_manhattan.csv"
+
+tg <- read.csv(tg_path)
+db <- read.csv(db_path)
+```
+
+```{r}
+# Quick view both datasets triglycerides and diabetes
+head(tg)
+head(db)
+```
+
+```{r}
+## Triglyceride Dataset
+print('Triglyceride Dataset')
+# check if NA still exists in chr rows
+unique(tg$chr)
+
+# Filter out rows with NA in chr
+tg_dataframe <- tg %>% filter(tg$chr != 'NA')
+
+# Replace 'X' in chr to 23
+tg_dataframe$chr[ tg_dataframe$chr == 'X' ] <- "23"
+
+# check if NA still exists in chr rows
+unique(tg_dataframe$chr)
+
+
+## Diabetes Dataset
+print("Diabetes Dataset")
+# check if NA still exists in chr rows
+unique(db$chr)
+
+# Filter out rows with NA in chr and p_val (there are none in db set)
+db_dataframe <- db %>% filter(db$chr != 'NA')
+
+# Replace 'X' in chr to 23
+db_dataframe$chr[ db_dataframe$chr == 'X' ] <- "23"
+
+# check if NA still exists in chr rows
+unique(db_dataframe$chr)
+```
+
+```{r}
+class(tg_dataframe$chr)
+class(db_dataframe$chr)
+
+# convert to numeric
+tg_dataframe$chr <- as.numeric(tg_dataframe$chr)
+db_dataframe$chr <- as.numeric(db_dataframe$chr)
+
+class(tg_dataframe$chr)
+class(db_dataframe$chr)
+```
+```{r}
+# check pval_EUR if any y axis value on manhattan plot are infinite
+any(is.infinite(-log10(tg_dataframe$pval_EUR)))
+max(-log10(tg_dataframe$pval_EUR), na.rm = TRUE)
+```
+```{r}
+# check the range of my p values in EUR (see 0)
+range(tg_dataframe$pval_EUR, na.rm = TRUE)
+range
+```
+```{r}
+# Check how many are 0 = pvalue in the dataset
+
+sum(tg_dataframe$pval_EUR == 0)
+sum(tg_dataframe$pval_CSA == 0)
+
+sum(db_dataframe$pval_EUR == 0)
+sum(db_dataframe$pval_CSA == 0)
+```
+```{r}
+# Replace 0 values for p-value in datasets with lowest value in pval
+# min_nonzero_EUR <- min(tg_dataframe$pval_EUR[tg_dataframe$pval_EUR > 0], na.rm = TRUE)
+# tg_dataframe$pval_EUR[tg_dataframe$pval_EUR == 0] <- min_nonzero_EUR
+
+# min_nonzero_CSA <- min(tg_dataframe$pval_CSA[tg_dataframe$pval_CSA > 0], na.rm = TRUE)
+# tg_dataframe$pval_CSA[tg_dataframe$pval_CSA == 0] <- min_nonzero_CSA
+
+
+# min_nonzero_EUR <- min(db_dataframe$pval_EUR[db_dataframe$pval_EUR > 0], na.rm = TRUE)
+# db_dataframe$pval_EUR[db_dataframe$pval_EUR == 0] <- min_nonzero_EUR
+
+# min_nonzero_CSA <- min(db_dataframe$pval_CSA[db_dataframe$pval_CSA > 0], na.rm = TRUE)
+# db_dataframe$pval_CSA[db_dataframe$pval_CSA == 0] <- min_nonzero_CSA
+```
+
+```{r}
+# instead of replacing the 0 p-values with the min p-value
+# just filter out the 0 p-values, to prevent infinite -log10(p)=x
+# Filter 0 values only for triglyceride EUR b/c only this has pvalue=0
+tg_dataframe <- tg_dataframe %>%
+  filter(tg_dataframe$pval_EUR != 0)
+
+# confirm no more 0s in pval_EUR
+sum(tg_dataframe$pval_EUR == 0)
+```
+```{r}
+# Get top 10 pval
+
+## Triglycerides
+# get top 5 for EUR
+tg_top_EUR <- tg_dataframe %>%
+  group_by(chr) %>%
+  arrange(pval_EUR) %>%
+  slice(1:5) %>% # get the top 5 from each group/chr
+  ungroup()
+
+# get top 5 for CSA
+tg_top_CSA <- tg_dataframe %>%
+  group_by(chr) %>%
+  arrange(pval_CSA) %>%
+  slice(1:5) %>%  # get the top 5 from each group/chr
+  ungroup()
+
+## Diabetes
+# get top 5 for EUR
+db_top_EUR <- db_dataframe %>%
+  group_by(chr) %>%
+  arrange(pval_EUR) %>%
+  slice(1:5) %>% # get the top 5 from each group/chr
+  ungroup()
+
+# get top 5 for CSA
+db_top_CSA <- db_dataframe %>%
+  group_by(chr) %>%
+  arrange(pval_CSA) %>%
+  slice(1:5) %>%  # get the top 5 from each group/chr
+  ungroup()
+```
+
+```{r}
+# Get SNP of Interests
+snpsOfInterest_tg_EUR <- tg_top_EUR$variant_id
+snpsOfInterest_tg_CSA <- tg_top_CSA$variant_id
+snpsOfInterest_db_EUR <- db_top_EUR$variant_id
+snpsOfInterest_db_CSA <- db_top_CSA$variant_id
+```
+
+```{r}
+# Make the Manhattan plot on the triglyceride EUR
+manhattan(tg_dataframe, main = "Manhattan Plot Triglyceride European Population", 
+          chr="chr", bp="pos", snp="variant_id", p="pval_EUR",
+          cex=0.6, # point size
+          cex.axis = 0.9, # axes labels size
+          col = c("blue4", "orange3"), # alternate col colors
+          chrlabs = c(1:22,"X"), # insert column names, replace 23 with X
+          # annotatePval = 0.01,
+          highlight = snpsOfInterest_tg_EUR
+          )
+```
+```{r}
+# Make the Manhattan plot on the triglyceride CSA
+manhattan(tg_dataframe, main = "Manhattan Plot Triglyceride Central/South Asian Population", 
+          chr="chr", bp="pos", snp="variant_id", p="pval_CSA",
+          cex=0.6, # point size
+          cex.axis = 0.9, # axes labels size
+          col = c("blue4", "orange3"), # alternate col colors
+          chrlabs = c(1:22,"X"), # insert column names, replace 23 with X
+          highlight = snpsOfInterest_tg_CSA
+          )
+```
+```{r}
+# Make the Manhattan plot on the diabetes EUR
+manhattan(db_dataframe, main = "Manhattan Plot Diabetes European Population", 
+          chr="chr", bp="pos", snp="variant_id", p="pval_EUR",
+          cex=0.6, # point size
+          cex.axis = 0.9, # axes labels size
+          col = c("blue4", "orange3"), # alternate col colors
+          chrlabs = c(1:22,"X"), # insert column names, replace 23 with X
+          highlight = snpsOfInterest_db_EUR
+          )
+```
+```{r}
+# Make the Manhattan plot on the diabetes CSA
+manhattan(db_dataframe, main = "Manhattan Plot Diabetes Central/South Asian Population", 
+          chr="chr", bp="pos", snp="variant_id", p="pval_CSA",
+          cex=0.6, # point size
+          cex.axis = 0.9, # axes labels size
+          col = c("blue4", "orange3"), # alternate col colors
+          chrlabs = c(1:22,"X"), # insert column names, replace 23 with X
+          highlight = snpsOfInterest_db_CSA
+          )
+```
+```{r}
+# Export the top 5 SNPs with lowest p-values per chromosome
+
+write.csv(tg_top_EUR, "./output/top_SNPs/triglyceride_EUR_top.csv", row.names=FALSE)
+write.csv(tg_top_CSA, "./output/top_SNPs/triglyceride_CSA_top.csv", row.names=FALSE)
+
+write.csv(db_top_EUR, "./output/top_SNPs/diabetes_EUR_top.csv", row.names=FALSE)
+write.csv(db_top_CSA, "./output/top_SNPs/diabetes_CSA_top.csv", row.names=FALSE)
+```
+
+# Generate the QQ Plots
+```{r}
+# QQ Plots
+# Triglycerides
+qq(tg_dataframe$pval_EUR, main = "Q-Q Plot Triglyceride European Population")
+```
+```{r}
+qq(tg_dataframe$pval_CSA, main = "Q-Q Plot Triglyceride Central/South Asian Population")
+```
+```{r}
+# Diabetes
+qq(db_dataframe$pval_EUR, main = "Q-Q Plot Diabetes European Population")
+```
+```{r}
+qq(db_dataframe$pval_CSA, main = "Q-Q Plot Diabetes Central/South Asian Population")
+```
+
