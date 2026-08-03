@@ -3,3 +3,16 @@ A genuine data-science question with findings, visualizations, and a writeup. Th
 Deliverable:
 
 Final poster draft (PDF) that includes motivating narrative, final analysis results, and the three sections from Phases 1 - 3. Also, include a link to your GitHub Repo on your poster.
+
+variants_manhattan:
+4_findings/variants_manhattan/output/plots/
+Plots for CSA and EUR diabetes and triglycerides: 
+	Manhattan plots
+	Q-Q plots 
+
+heatmap_calc:
+4_findings/heatmap_calc/figures/
+Plots for CSA vs EUR effect size:
+	Barplot
+	Heatmap
+	Heterogeneity_crosscheck
