@@ -22,4 +22,4 @@ https://docs.google.com/spreadsheets/d/1AeeADtT0U1AukliiNyiVzVRdLYPkTbruQSk38Deu
 -  The effect size does not diverge between ancestry in many of the chromosomes for triglyceride and diabetes -> heatmap
   - Triglyceride diverges most on chromosome 6, 11, and 14. Diabetes diverges most on chromosome 18, and 21.
 - Our calculated z-scores show the same analysis made by the Pan-UKBB using heterogeneity test neglog(p) -> heterogeneity_crosscheck
-    - The differences in chromosomes highlighted by the two plots (effect size and Manhattan) may not necessarily be due to the strongest GWAS association and instead could be due to ancestry alone.
+- The differences in chromosomes highlighted by the two plots (effect size and Manhattan) may not necessarily be due to the strongest GWAS association and instead could be due to ancestry alone.
