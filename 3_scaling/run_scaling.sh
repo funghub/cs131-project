@@ -1,34 +1,58 @@
 #!/bin/bash
-# run_scaling.sh — run the same Spark job at 2, 3, and 4 executors
-#based on spark demo 2
+#-e will stop at failure
+set -e
 
-set -euo pipefail
+BUCKET="gs://cs131-project/cs131_proj"
+SCRIPT_PATH="$BUCKET/scaling.py"          # local path to .py file or gs bucket works ----
+TG_INPUT_PATH="$BUCKET/biomarkers-30870-both_sexes-irnt.tsv.gz"
+DB_INPUT_PATH="$BUCKET/icd10-E11-both_sexes.tsv.gz"
+OUTPUT_BASE="$BUCKET/output/"
+REGION="us-east1"
 
-BUCKET=gs://cs131-501617-project
-TG_INPUT=$BUCKET/biomarkers-30870-both_sexes-irnt.tsv.gz
-DB_INPUT=$BUCKET/icd10-E11-both_sexes.tsv.gz
-SCRIPT=$BUCKET/scripts/scaling.py
+#create file for Runtime results ----
+echo "workers,runtime_seconds" > results.csv
 
-TIMING_LOG=/mnt/c/Users/Jane/Documents/cs131-project/3_scaling/scaling.txt 
+for n in 1 2 4; do
+  CLUSTER="cs131-cluster-${n}w"
 
-for N in 2 3 4; do
-  echo "=== Submitting batch with $N executor(s) ===" | tee -a "$TIMING_LOG"
+  echo "=== [${n} workers] Creating cluster ==="
+  if [ "$n" -eq 1 ]; then
+    gcloud dataproc clusters create $CLUSTER \
+      --region=$REGION \
+      --single-node \
+      --master-machine-type=n1-standard-4 \
+      --master-boot-disk-size=100GB
+  else
+    gcloud dataproc clusters create $CLUSTER \
+      --region=$REGION \
+      --num-workers=$n \
+      --worker-machine-type=n1-standard-4 \
+      --master-machine-type=n1-standard-4 \
+      --master-boot-disk-size=100GB \
+      --worker-boot-disk-size=100GB
+  fi
 
+  echo "=== [${n} workers] Submitting job ==="
   START=$(date +%s)
-  gcloud dataproc batches submit pyspark "$SCRIPT" \
-    --region=us-central1 \
-    --deps-bucket="$BUCKET" \
-    --properties=spark.dynamicAllocation.enabled=false,spark.executor.instances="$N" \
-    -- "$TG_INPUT" "$DB_INPUT" "$BUCKET/output/exec$N/"
+
+  gcloud dataproc jobs submit pyspark \
+    --cluster=$CLUSTER \
+    --region=$REGION \
+    $SCRIPT_PATH \
+    -- "$TG_INPUT_PATH" "$DB_INPUT_PATH" "${OUTPUT_BASE}run_${n}w/" \
+    2>&1 | tee "job_output_${n}w.log"
+
   END=$(date +%s)
 
-  ELAPSED=$((END - START))
-  echo "exec$N: ${ELAPSED}s" | tee -a "$TIMING_LOG"
+# Calculate runtime and write it into a csv file for timing ----
+  RUNTIME=$((END-START))
+  echo "${n},${RUNTIME}" >> results.csv
+  echo "=== [${n} workers] Runtime: ${RUNTIME}s ==="
 
-  if [ "$N" -ne 4 ]; then
-    echo "=== Waiting 120s for machines to release ===" | tee -a "$TIMING_LOG"
-    sleep 120
-  fi
+  echo "=== [${n} workers] Deleting cluster ==="
+  gcloud dataproc clusters delete $CLUSTER --region=$REGION -q
 done
 
-echo "all runs done"
+echo ""
+echo "=== FINAL RESULTS ==="
+cat results.csv

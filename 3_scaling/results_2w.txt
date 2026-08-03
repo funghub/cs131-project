@@ -1,0 +1,127 @@
+Job [07c6f12b8fb4433283c3ff9e56320a8b] submitted.
+Waiting for job output...
+ |-- chr: string (nullable = true)
+ |-- pos: integer (nullable = true)
+ |-- ref: string (nullable = true)
+ |-- alt: string (nullable = true)
+ |-- af_meta_hq: string (nullable = true)
+ |-- beta_meta_hq: string (nullable = true)
+ |-- se_meta_hq: string (nullable = true)
+ |-- neglog10_pval_meta_hq: string (nullable = true)
+ |-- neglog10_pval_heterogeneity_hq: string (nullable = true)
+ |-- af_meta: string (nullable = true)
+ |-- beta_meta: string (nullable = true)
+ |-- se_meta: string (nullable = true)
+ |-- neglog10_pval_meta: string (nullable = true)
+ |-- neglog10_pval_heterogeneity: string (nullable = true)
+ |-- af_AFR: string (nullable = true)
+ |-- af_AMR: string (nullable = true)
+ |-- af_CSA: string (nullable = true)
+ |-- af_EAS: string (nullable = true)
+ |-- af_EUR: string (nullable = true)
+ |-- af_MID: string (nullable = true)
+ |-- beta_AFR: string (nullable = true)
+ |-- beta_AMR: string (nullable = true)
+ |-- beta_CSA: string (nullable = true)
+ |-- beta_EAS: string (nullable = true)
+ |-- beta_EUR: string (nullable = true)
+ |-- beta_MID: string (nullable = true)
+ |-- se_AFR: string (nullable = true)
+ |-- se_AMR: string (nullable = true)
+ |-- se_CSA: string (nullable = true)
+ |-- se_EAS: string (nullable = true)
+ |-- se_EUR: string (nullable = true)
+ |-- se_MID: string (nullable = true)
+ |-- neglog10_pval_AFR: string (nullable = true)
+ |-- neglog10_pval_AMR: string (nullable = true)
+ |-- neglog10_pval_CSA: string (nullable = true)
+ |-- neglog10_pval_EAS: string (nullable = true)
+ |-- neglog10_pval_EUR: string (nullable = true)
+ |-- neglog10_pval_MID: string (nullable = true)
+ |-- low_confidence_AFR: string (nullable = true)
+ |-- low_confidence_AMR: string (nullable = true)
+ |-- low_confidence_CSA: string (nullable = true)
+ |-- low_confidence_EAS: string (nullable = true)
+ |-- low_confidence_EUR: string (nullable = true)
+ |-- low_confidence_MID: string (nullable = true)
+
+tg_clean rows after low_confidence filter: 13314501
+db_clean rows after low_confidence filter: 13060391
+
+Significant triglyceride variants: 79265
+Joined row count: 79173
+
+Check first 5 rows of z-scores:
++---------------+------------------+--------------------+
+|     variant_id|    z_triglyceride|          z_diabetes|
++---------------+------------------+--------------------+
+|1:10797428:G:GC|0.5724893679662423| -0.3717065799727368|
+| 1:10799577:T:C|0.7395075562231058|-0.33688034796783095|
+| 1:23755513:T:C|-2.078358776769511| 0.16943548569657813|
+| 1:23755716:T:C| -2.07623930014625|  0.1719054054564959|
+| 1:23756155:T:C|-2.075815404821598| 0.17526711116320068|
++---------------+------------------+--------------------+
+only showing top 5 rows
+
+
+Check chromosome-level aggregation:
++---+-----------------------+-------------------+------------------------+------------------------+------------+
+|chr|mean_abs_z_triglyceride|mean_abs_z_diabetes|mean_tg_heterogeneity_hq|mean_db_heterogeneity_hq|num_variants|
++---+-----------------------+-------------------+------------------------+------------------------+------------+
+|  7|     0.9061346601945971| 1.0304948860209675|      0.9910163100654938|      0.5992456381937261|        2901|
+| 18|     1.2318537521963957| 1.2679479916560255|       0.522050378666667|      0.8531723136000007|         375|
+|  9|     0.8443049498764507| 0.6923914092389081|      0.8375006080402004|     0.38583245648241205|         995|
+| 15|     1.0363646646891331| 0.8291511359583331|       1.230541058235293|     0.43164585716577597|        1870|
+| 13|     0.9777863148447864| 0.8052986774534516|      0.6118128736616699|      0.4277231498929335|         467|
+| 14|      1.572648954304633| 0.8224822594513391|       0.954286416666667|     0.41710342592592586|         108|
+|  3|     0.8537677769214549|  0.782261334245784|      0.4460328000411534|     0.40844517271604935|        2430|
+| 22|     0.8126020679430771| 0.7324751006621577|     0.42972097011278215|     0.39829244454887275|        1064|
+| 16|     0.9782408998167724|  0.721744572921553|      0.5556470047789718|     0.37960534928315404|        1674|
+| 17|     0.8238951644310665| 0.7340528106875505|      0.6040715736842098|     0.39332429232781974|        2660|
+|  6|     1.4002083973669421|  0.956876315692632|      0.9109498441541036|       0.552454731189758|       19441|
+|  X|     1.1277967741854722|  1.016788937522198|      0.5423349801302307|      0.6076160416744202|        4300|
+|  1|     0.9181733976137313| 0.9554374610049805|      0.5993807914902813|      0.5529007779999975|        4630|
+| 20|     0.9160965938947665| 1.0822549936270678|      0.4217360750323421|       0.647041736610608|        1546|
+| 21|     0.8779016842219439| 1.4638689988881493|     0.40320070175438594|      0.8714777777777782|         171|
+| 11|       1.17273884831277| 0.7454286008591067|      1.7215345398730753|      0.4053005240834091|        5515|
+|  8|     1.0782116744356456| 0.8003836885009848|       1.012665829595743|     0.44015906687517425|       10711|
+|  5|     1.0647210704094079| 0.6980738793561287|      0.8291566903999988|     0.35150070606315814|        2375|
+| 19|     1.0933318938925085| 0.7765319589670476|      0.9332086791196759|      0.4251426370680252|        2749|
+| 10|     0.8170534477943148| 0.8413687339762407|      0.5106134880212289|      0.4534927888741471|        2638|
+|  4|     1.0174095268796879| 0.8043776915104021|      0.6838013520114953|      0.4336475873850576|        3480|
+| 12|     0.9798700628984942| 0.8555602290347156|      0.6605347432170554|      0.4714567770348834|        2064|
+|  2|     0.9886500576314767| 0.9796408086034287|      0.9307865552006395|      0.5734215298882005|        5009|
++---+-----------------------+-------------------+------------------------+------------------------+------------+
+
+placement:
+  clusterName: cs131-cluster-2w
+  clusterUuid: 355f85b6-376b-498c-a63a-bda5a9fb93c3
+pysparkJob:
+  args:
+  - gs://cs131-project/cs131_proj/biomarkers-30870-both_sexes-irnt.tsv.gz
+  - gs://cs131-project/cs131_proj/icd10-E11-both_sexes.tsv.gz
+  - gs://cs131-project/cs131_proj/output/run_2w/
+  mainPythonFileUri: gs://cs131-project/cs131_proj/scaling.py
+reference:
+  jobId: 07c6f12b8fb4433283c3ff9e56320a8b
+  projectId: cs131-501617
+status:
+  state: DONE
+  stateStartTime: '2026-08-02T18:50:50.032601Z'
+statusHistory:
+- state: PENDING
+  stateStartTime: '2026-08-02T18:25:04.739587Z'
+- state: SETUP_DONE
+  stateStartTime: '2026-08-02T18:25:04.806868Z'
+- details: Agent reported job success
+  state: RUNNING
+  stateStartTime: '2026-08-02T18:25:05.425139Z'
+yarnApplications:
+- memoryMbSeconds: '10444130'
+  name: GWAS_Join
+  progress: 1.0
+  state: FINISHED
+  trackingUrl: http://cs131-cluster-2w-m.c.cs131-501617.internal.:8088/proxy/application_1785695045952_0001/
+  vcoreSeconds: '3308'
+
+=== [2 workers] Runtime: 1555s ===

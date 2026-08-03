@@ -1,0 +1,12 @@
+Phase 4 summary stats (fill these into the poster narrative)
+============================================================
+Total variants analyzed across chromosomes: 79173
+
+Chromosome with highest mean |z| (triglyceride): 14 (mean |z| = 1.573)
+Chromosome with highest mean |z| (diabetes): 21 (mean |z| = 1.464)
+
+Overall mean |z| triglyceride (across chromosomes): 1.021
+Overall mean |z| diabetes (across chromosomes): 0.887
+
+Reminder: |z| > 1.96 = significant divergence in effect size 
+between CSA and EUR ancestry at alpha = 0.05 (two-sided).
