@@ -18,7 +18,7 @@ https://docs.google.com/spreadsheets/d/1AeeADtT0U1AukliiNyiVzVRdLYPkTbruQSk38Deu
 - Europeans exhibit stronger statistical significance overall but have the same chromosomes effected as Central/South Asian ancestry  -> Manhattan plots
 - The Manhattan plot shows the statistical significance of different variants across the entire genome.
   - ex: Chromosome 11 contains variants significantly associated with levels of triglycerides.
-- <img width="933" height="576" alt="triglycerides_EUR_neglog" src="https://github.com/user-attachments/assets/08ed163e-8a26-4b65-aaa2-0756f0a02f2a" />
+<img width="933" height="576" alt="triglycerides_EUR_neglog" src="https://github.com/user-attachments/assets/08ed163e-8a26-4b65-aaa2-0756f0a02f2a" />
 <img width="933" height="576" alt="triglycerides_CSA_neglog" src="https://github.com/user-attachments/assets/23f2e9a9-9c72-4b10-9a5e-390f75722094" />
 
 - EUR have much stronger association signals and CSA has fewer genome-wide significant hits -> Q-Q plots
