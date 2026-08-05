@@ -43,6 +43,6 @@ https://docs.google.com/spreadsheets/d/1AeeADtT0U1AukliiNyiVzVRdLYPkTbruQSk38Deu
 
 ### Conclusion
 - The differences in chromosomes highlighted by the two plots (effect size and Manhattan) may not necessarily be due variants with the the strongest GWAS association and instead could be due to ancestry alone.
-- Significant discrepancies in the data between European and Central/South Asian samples (8,413 CSA v.s. 40,0639 EUR in triglycerides and 1,662 CSA v.s. 22,634 EUR in diabetes) suggest that CSA's results are systematically less reliable/precise, which limits how much we can trust both the Manhattan plot comparison and the heterogeneity z-scores.
+- Significant discrepancies in the data between European and Central/South Asian samples (8,413 CSA v.s. 400,639 EUR in triglycerides and 1,662 CSA v.s. 22,634 EUR in diabetes) suggest that CSA's results are systematically less reliable/precise, which limits how much we can trust both the Manhattan plot comparison and the heterogeneity z-scores.
 
 <img width="2000" height="1414" alt="GWAS_poster" src="https://github.com/user-attachments/assets/b6516e9f-7eff-486a-9f86-7c0c4216dcd5" />
