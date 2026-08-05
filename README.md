@@ -16,6 +16,8 @@ https://docs.google.com/spreadsheets/d/1AeeADtT0U1AukliiNyiVzVRdLYPkTbruQSk38Deu
 - There are more NA values for CSA (~13,000,000) than EUR (~5,000,000) meaning CSA has a smaller sample size in the Biobank.
 ### Phase 3 and 4
 - Europeans exhibit stronger statistical significance overall but have the same chromosomes effected as Central/South Asian ancestry  -> Manhattan plots
+- The Manhattan plot shows the statistical significance of different variants across the entire genome.
+  - ex: Chromosome 11 contains variants significantly associated with levels of triglycerides.
 - <img width="933" height="576" alt="triglycerides_EUR_neglog" src="https://github.com/user-attachments/assets/08ed163e-8a26-4b65-aaa2-0756f0a02f2a" />
 <img width="933" height="576" alt="triglycerides_CSA_neglog" src="https://github.com/user-attachments/assets/23f2e9a9-9c72-4b10-9a5e-390f75722094" />
 
@@ -29,6 +31,8 @@ https://docs.google.com/spreadsheets/d/1AeeADtT0U1AukliiNyiVzVRdLYPkTbruQSk38Deu
 
 -  The effect size does not diverge between ancestry in many of the chromosomes for triglyceride and diabetes -> heatmap
   - Triglyceride diverges most on chromosome 6, 11, and 14. Diabetes diverges most on chromosome 18, and 21.
+  - In the heatmap, a lighter color indicates more divergence in the variant effects between the populations.
+    - ex: Chromosome 14 has the highest variant effect size divergence between the two populations in triglycerides.
 <img width="2800" height="700" alt="chr_heatmap" src="https://github.com/user-attachments/assets/cb0a023b-1e6b-413e-8735-f0e7dd03b62a" />
 
 - Our calculated z-scores show the same analysis made by the Pan-UKBB using heterogeneity test neglog(p) -> heterogeneity_crosscheck
