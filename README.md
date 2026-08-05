@@ -16,7 +16,7 @@ https://docs.google.com/spreadsheets/d/1AeeADtT0U1AukliiNyiVzVRdLYPkTbruQSk38Deu
 - There are more NA values for CSA (~13,000,000) than EUR (~5,000,000) meaning CSA has a smaller sample size in the Biobank.
 ### Phase 3 and 4
 - Europeans exhibit stronger statistical significance overall but have the same chromosomes effected as Central/South Asian ancestry  -> Manhattan plots
-- <img width="733" height="376" alt="triglycerides_EUR_neglog" src="https://github.com/user-attachments/assets/08ed163e-8a26-4b65-aaa2-0756f0a02f2a" />
+- <img width="933" height="576" alt="triglycerides_EUR_neglog" src="https://github.com/user-attachments/assets/08ed163e-8a26-4b65-aaa2-0756f0a02f2a" />
 <img width="933" height="576" alt="triglycerides_CSA_neglog" src="https://github.com/user-attachments/assets/23f2e9a9-9c72-4b10-9a5e-390f75722094" />
 
 - EUR have much stronger association signals and CSA has fewer genome-wide significant hits -> Q-Q plots
