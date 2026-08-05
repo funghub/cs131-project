@@ -38,7 +38,8 @@ https://docs.google.com/spreadsheets/d/1AeeADtT0U1AukliiNyiVzVRdLYPkTbruQSk38Deu
 - Our calculated z-scores show the same analysis made by the Pan-UKBB using heterogeneity test neglog(p) -> heterogeneity_crosscheck
 <img width="1400" height="1200" alt="heterogeneity_crosscheck" src="https://github.com/user-attachments/assets/34ee7e75-6a18-4ace-95eb-8952cdfea4a6" />
 
-More plots are located in the *4_findings* folder
+
+**More plots are located in the *4_findings* folder**
 
 ### Conclusion
 - The differences in chromosomes highlighted by the two plots (effect size and Manhattan) may not necessarily be due variants with the the strongest GWAS association and instead could be due to ancestry alone.
