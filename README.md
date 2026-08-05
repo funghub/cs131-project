@@ -16,7 +16,7 @@ https://docs.google.com/spreadsheets/d/1AeeADtT0U1AukliiNyiVzVRdLYPkTbruQSk38Deu
 - There are more NA values for CSA (~13,000,000) than EUR (~5,000,000) meaning CSA has a smaller sample size in the Biobank.
 ### Phase 3 and 4
 - Europeans exhibit stronger statistical significance overall but have the same chromosomes effected as Central/South Asian ancestry  -> Manhattan plots
-- <img width="933" height="576" alt="triglycerides_EUR_neglog" src="https://github.com/user-attachments/assets/08ed163e-8a26-4b65-aaa2-0756f0a02f2a" />
+- <img width="733" height="376" alt="triglycerides_EUR_neglog" src="https://github.com/user-attachments/assets/08ed163e-8a26-4b65-aaa2-0756f0a02f2a" />
 <img width="933" height="576" alt="triglycerides_CSA_neglog" src="https://github.com/user-attachments/assets/23f2e9a9-9c72-4b10-9a5e-390f75722094" />
 
 - EUR have much stronger association signals and CSA has fewer genome-wide significant hits -> Q-Q plots
@@ -33,6 +33,8 @@ https://docs.google.com/spreadsheets/d/1AeeADtT0U1AukliiNyiVzVRdLYPkTbruQSk38Deu
 
 - Our calculated z-scores show the same analysis made by the Pan-UKBB using heterogeneity test neglog(p) -> heterogeneity_crosscheck
 <img width="1400" height="1200" alt="heterogeneity_crosscheck" src="https://github.com/user-attachments/assets/34ee7e75-6a18-4ace-95eb-8952cdfea4a6" />
+
+- More plots are located in the *4_findings* folder
 
 ### Conclusion
 - The differences in chromosomes highlighted by the two plots (effect size and Manhattan) may not necessarily be due variants with the the strongest GWAS association and instead could be due to ancestry alone.
