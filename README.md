@@ -1,4 +1,4 @@
-# PySpark & GCP Pipeline for Multi-Ancestry GWAS Data (58M Rows)
+# PySpark & GCP Pipeline for Multi-Ancestry GWAS Data (58M Rows) - CS 131 Final Project
 
 ## Project Goals:
 1. Answer a real data-science question with big data analysis
