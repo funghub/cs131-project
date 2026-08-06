@@ -40,7 +40,8 @@ https://docs.google.com/spreadsheets/d/1AeeADtT0U1AukliiNyiVzVRdLYPkTbruQSk38Deu
 
 
 #### **More plots are located in the *4_findings* folder**
-#### **top 5 variants of significance are located in *4_findings/**
+#### **top 5 variants of significance are located in *4_findings/variants_manhattan/output/top_SNPs/*neglog.csv**
+
 
 ### Conclusion
 - The differences in chromosomes highlighted by the two plots (effect size and Manhattan) may not necessarily be due variants with the the strongest GWAS association and instead could be due to ancestry alone.
