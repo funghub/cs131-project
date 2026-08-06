@@ -40,7 +40,8 @@ https://docs.google.com/spreadsheets/d/1AeeADtT0U1AukliiNyiVzVRdLYPkTbruQSk38Deu
 
 
 #### **More plots are located in the *4_findings* folder**
-#### **top 5 variants of significance are located in *4_findings/variants_manhattan/output/top_SNPs/*neglog.csv**
+#### **top 5 variants of significance are located in *4_findings/variants_manhattan/output/top_SNPs/\*_neglog.csv**
+#### filenames in *4_findings/variants_manhattan* with *\*_neglog* are more accurate than without because they uses the neglog10 value directly from the GWAS dataset
 
 
 ### Conclusion
